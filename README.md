@@ -15,6 +15,8 @@ What this program can do so far:
 	
 	generate resource pack entity geometry file for the dummyEntity template.
 	
+	auto populate lang entries for dummyEntity template
+	
 To do:
 	
 	finish the dummyEntity template.
