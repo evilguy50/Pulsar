@@ -1,0 +1,2 @@
+pack.name=$works resource pack
+pack.description= generated with evil's addon generator
