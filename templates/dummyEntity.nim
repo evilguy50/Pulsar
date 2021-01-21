@@ -10,6 +10,8 @@ proc dummyEntity*(name: string, root: string, works: string)=
   os.setCurrentDir("BP")
   if os.dirExists("entities") == false:
     os.createDir("entities")
+  if os.dirExists("texts") == false:
+    os.createDir("texts")
 
   #generate BP template
   os.setCurrentDir(root)
@@ -53,6 +55,54 @@ proc dummyEntity*(name: string, root: string, works: string)=
   var dummyReplace3 = replace(dummyRead3, "$name", name)
   writeFile(dummyString3, dummyReplace3)
   echo (name, " saved geometry as ", name, ".json")
+  os.setCurrentDir(works)
+
+  #
+  #   language entries
+  #
+
+  #generate BP lang files
+  os.setCurrentDir(root)
+  var usSTb = "./templates/BP/texts/en_US.txt"  #create lang file
+  var usLb = fmt"./{works}/BP/texts/en_US.lang"
+  if os.fileExists(usLb) == false:
+    var dummyRead4l = readFile(usSTb)
+    var dummyReplace4l = replace(dummyRead4l, "$works", works)
+    writeFile(usLb, dummyReplace4l)
+  
+  var langSTb = "./templates/BP/texts/languages.txt"  #create lang json file
+  var langLb = fmt"./{works}/BP/texts/languages.json"
+  if os.fileExists(langLb) == false:
+    var dummyRead4j = readFile(langSTb)
+    var dummyReplace4j = replace(dummyRead4j, "$none", works)
+    writeFile(langLb, dummyReplace4j)
+  os.setCurrentDir(works)
+
+  #generate RP lang files
+  os.setCurrentDir(root)
+  var usSTr = "./templates/RP/texts/en_US.txt"  #create lang file
+  var usLr = fmt"./{works}/RP/texts/en_US.lang"
+  if os.fileExists(usLr) == false:
+    var dummyRead5l = readFile(usSTr)
+    var dummyReplace5l = replace(dummyRead5l, "$works", works)
+    writeFile(usLr, dummyReplace5l)
+  
+  var langSTr = "./templates/RP/texts/languages.txt"  #create lang json
+  var langLr = fmt"./{works}/RP/texts/languages.json"
+  if os.fileExists(langLr) == false:
+    var dummyRead5j = readFile(langSTr)
+    var dummyReplace5j = replace(dummyRead5j, "$works", works)
+    writeFile(langLr, dummyReplace5j)
+
+  #populate entites
+  var langEntry = open(usLr, fmAppend)
+  var entityEntry = fmt"entity.evil:{name}.name={name}"
+  var breakEntry = "\n"
+  write(langEntry, entityEntry)
+  write(langEntry, breakEntry)
+  close(langEntry)
+  
+
   os.setCurrentDir(works)
 
   return
