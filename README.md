@@ -33,3 +33,7 @@ nim dependencies:
 	strutils
 	strformat
 	argparse
+	
+usage:
+	
+	./evils_addon_gen -o outputdirname -t templatename names
