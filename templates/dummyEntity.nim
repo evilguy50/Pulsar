@@ -2,7 +2,7 @@ import os
 import strutils
 import strformat
 
-proc dummyEntity*(name: string, root: string, works: string)=
+proc dummyEntity*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
   #setup BP folders
   echo "creating behaviour pack files for: ", name
   if os.dirExists("BP") == false:
@@ -12,6 +12,7 @@ proc dummyEntity*(name: string, root: string, works: string)=
     os.createDir("entities")
   if os.dirExists("texts") == false:
     os.createDir("texts")
+  echo "generated behaviour folders"
 
   #generate BP template
   os.setCurrentDir(root)
@@ -21,9 +22,9 @@ proc dummyEntity*(name: string, root: string, works: string)=
   var dummyReplace = replace(dummyRead, "$name", name)
   writeFile(dummyString, dummyReplace)
   echo (name, " saved entity as ", name, ".json")
-  os.setCurrentDir(works)
 
   #setup RP folders
+  os.setCurrentDir(works)
   echo "creating resource pack files for: ", name
   if os.dirExists("RP") == false:
     os.createDir("RP")
@@ -36,33 +37,43 @@ proc dummyEntity*(name: string, root: string, works: string)=
     os.createDir("models/entity")
   if os.dirExists("texts") == false:
     os.createDir("texts")
+  if os.dirExists("textures") == false:
+    os.createDir("textures")
+  if os.dirExists("textures/items") == false:
+    os.createDir("textures/items")
+  if os.dirExists("textures/items/egg") == false:
+    os.createDir("textures/items/egg")
+  os.setCurrentDir(root)
+  echo "generated resource folders"
 
   #generate RP entities
-  os.setCurrentDir(root)
   var dummyFileName2 = "./templates/RP/dummyEntity.txt"
   var dummyString2 = fmt"./{works}/RP/entity/{name}.json"
   var dummyRead2 = readFile(dummyFileName2)
   var dummyReplace2 = replace(dummyRead2, "$name", name)
   writeFile(dummyString2, dummyReplace2)
   echo (name, " saved entity as ", name, ".json")
-  os.setCurrentDir(works)
 
   #generate RP geometry
-  os.setCurrentDir(root)
   var dummyFileName3 = "./templates/RP/dummyEntity_geo.txt"
   var dummyString3 = fmt"./{works}/RP/models/entity/{name}.json"
   var dummyRead3 = readFile(dummyFileName3)
   var dummyReplace3 = replace(dummyRead3, "$name", name)
   writeFile(dummyString3, dummyReplace3)
   echo (name, " saved geometry as ", name, ".json")
-  os.setCurrentDir(works)
+
+
+  #generate spawnegg texture
+  var spawneggFileName = "./templates/RP/textures/evil.png"
+  var spawneggString = fmt"./{works}/RP/textures/items/egg/{name}.png"
+  copyFile(spawneggFileName, spawneggString)
+  echo (name, " saved spawnegg as ", name, ".png")
 
   #
   #   language entries
   #
 
   #generate BP lang files
-  os.setCurrentDir(root)
   var usSTb = "./templates/BP/texts/en_US.txt"  #create lang file
   var usLb = fmt"./{works}/BP/texts/en_US.lang"
   if os.fileExists(usLb) == false:
@@ -76,10 +87,9 @@ proc dummyEntity*(name: string, root: string, works: string)=
     var dummyRead4j = readFile(langSTb)
     var dummyReplace4j = replace(dummyRead4j, "$none", works)
     writeFile(langLb, dummyReplace4j)
-  os.setCurrentDir(works)
+  echo "generated behaviour language files"
 
   #generate RP lang files
-  os.setCurrentDir(root)
   var usSTr = "./templates/RP/texts/en_US.txt"  #create lang file
   var usLr = fmt"./{works}/RP/texts/en_US.lang"
   if os.fileExists(usLr) == false:
@@ -93,15 +103,42 @@ proc dummyEntity*(name: string, root: string, works: string)=
     var dummyRead5j = readFile(langSTr)
     var dummyReplace5j = replace(dummyRead5j, "$works", works)
     writeFile(langLr, dummyReplace5j)
+  echo "generated resource language files"
 
-  #populate entites
+  #populate entity entites
   var langEntry = open(usLr, fmAppend)
   var entityEntry = fmt"entity.evil:{name}.name={name}"
   var breakEntry = "\n"
   write(langEntry, entityEntry)
   write(langEntry, breakEntry)
+  echo ("added language entry for entity ", name)
+
+  #populate spawnegg entries
+  var spawneggEntry = fmt"item.spawn_egg.entity.evil:{name}.name={name}"
+  write(langEntry, spawneggEntry)
+  write(langEntry, breakEntry)
   close(langEntry)
-  
+  echo ("added language entry for spawnegg ", name)
+
+  #
+  # generate texture json
+  #
+  var textureJsonTemplate = fmt"./{works}/RP/textures/item_texture.json"
+  if os.fileExists(textureJsonTemplate) == false:
+    var textureJson = readFile("./templates/RP/dummyEntity_textures.txt")
+    var textureJsonGen = replace(textureJson, "$works", works)
+    var textureJsonGen2 = replace(textureJsonGen, "$name", name)
+    writeFile(textureJsonTemplate, textureJsonGen2)
+  if nameNumber > 1:
+    var textureJsonPopulate = open(textureJsonTemplate, fmAppend)
+    var textureEntryRead = readFile("./templates/RP/dummyEntity_textureEntry.txt")
+    var textureEntry = replace(textureEntryRead, "$name", name)
+    write(textureJsonPopulate, textureEntry)
+    close(textureJsonPopulate)
+  if nameNumber >= nameCount:
+    var textureJsonPopulate2 = open(textureJsonTemplate, fmAppend)
+    var textureEnd = "}}"
+    write(textureJsonPopulate2, textureEnd)
 
   os.setCurrentDir(works)
 
