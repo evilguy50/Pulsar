@@ -15,6 +15,12 @@ proc main(args: seq[string]) =
 #parse options
   var optGen = opts.parse(args)
 
+#count name arguments
+  var nameCount = 0
+  for i in optGen.names:
+    inc(nameCount, 1)
+  var nameNumber = 0
+  
 #set output directory
   var root: string = os.getCurrentDir() % "/"
   setOutput(optGen.outputDir)
@@ -22,7 +28,9 @@ proc main(args: seq[string]) =
 #generate dummy entities
   if optGen.templateGen == "dummyEntity":
     for dummies in optGen.names:
-      dummyEntity(dummies, root, optGen.outputDir)
+      inc(nameNumber, 1)
+      dummyEntity(dummies, root, optGen.outputDir, nameCount, nameNumber)
+      
 
 #load program
 when isMainModule:
