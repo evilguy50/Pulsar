@@ -124,12 +124,22 @@ proc dummyEntity*(name: string, root: string, works: string, nameCount: int, nam
   # generate texture json
   #
   var textureJsonTemplate = fmt"./{works}/RP/textures/item_texture.json"
+  var textureJsonRerun = fmt"./{works}/RP/textures/item_texture2.json"
+  var newJson: bool = false
   if os.fileExists(textureJsonTemplate) == false:
     var textureJson = readFile("./templates/RP/dummyEntity_textures.txt")
     var textureJsonGen = replace(textureJson, "$works", works)
     var textureJsonGen2 = replace(textureJsonGen, "$name", name)
     writeFile(textureJsonTemplate, textureJsonGen2)
-  if nameNumber > 1:
+    newJson = true
+  elif newJson == false and nameNumber == 1:
+    copyFile(textureJsonTemplate, textureJsonRerun)
+    var oldRead = readFile(textureJsonRerun)
+    var oldReplace = replace(oldRead, "}}", "")
+    removeFile(textureJsonTemplate)
+    writeFile(textureJsonTemplate, oldReplace)
+    removeFile(textureJsonRerun)
+  if newJson == false:
     var textureJsonPopulate = open(textureJsonTemplate, fmAppend)
     var textureEntryRead = readFile("./templates/RP/dummyEntity_textureEntry.txt")
     var textureEntry = replace(textureEntryRead, "$name", name)
