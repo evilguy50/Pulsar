@@ -7,8 +7,10 @@ proc manifest*(works: string, root: string)=
     #setup directory placeholders
     var resourceTemplate = "./templates/RPmanifest.txt"
     var resourceManifest = fmt"./{works}/RP/"
+    var resourceManifestFile = resourceManifest % "manifest.json"
     var behaviourTemplate = "./templates/BPmanifest.txt"
     var behaviourManifest = fmt"./{works}/BP/"
+    var behaviourManifestFile = behaviourManifest % "manifest.json"
 
     #generate uuid
     var uuid1 = genUUID()
@@ -21,7 +23,7 @@ proc manifest*(works: string, root: string)=
     var uuid3s = $uuid3
     var uuid4s = $uuid4
 
-    if os.fileExists(resourceManifest) == false:
+    if os.fileExists(resourceManifestFile) == false:
         #replace placholders
         var rpRead = readFile(resourceTemplate)
         var rpReplace = replace(rpRead, "$works", works)
@@ -31,7 +33,7 @@ proc manifest*(works: string, root: string)=
         writeFile("manifest.json", rpReplace3)
         os.setCurrentDir(root)
 
-    if os.fileExists(behaviourManifest) == false:
+    if os.fileExists(behaviourManifestFile) == false:
         #replace placholders
         var bpRead = readFile(behaviourTemplate)
         var bpReplace = replace(bpRead, "$works", works)
