@@ -1,6 +1,7 @@
 #import dependencies
 import argparse
 import os
+import manifest
 import outputDir
 import templates/dummyEntity
 
@@ -30,7 +31,8 @@ proc main(args: seq[string]) =
     for dummies in optGen.names:
       inc(nameNumber, 1)
       dummyEntity(dummies, root, optGen.outputDir, nameCount, nameNumber)
-      
+   
+  manifest(optGen.outputDir, root)
 
 #load program
 when isMainModule:
