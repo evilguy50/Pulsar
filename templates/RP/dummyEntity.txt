@@ -16,7 +16,8 @@
 				"default": "textures/entity/$name"
 			},
             "spawn_egg": {
-         "texture": "$name"
+         "texture": "$name",
+	 "texture_index": 0
             }
 		}
 	}
