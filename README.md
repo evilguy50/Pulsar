@@ -11,6 +11,8 @@ What this program can do so far:
 
 	generate addon for dummyEntity template. (Note: pack manifest generation not finished. so you will need to make a pack manifest file)
 	
+	run the dummyEntity template multiple times in the same output directory
+	
 To do:
 	
 	setup pack manifest generation with linked uuids.
