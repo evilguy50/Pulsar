@@ -5,10 +5,10 @@ import strutils
 proc manifest*(works: string, root: string)=
     os.setCurrentDir(root)
     #setup directory placeholders
-    var resourceTemplate = "./templates/RPmanifest.txt"
+    var resourceTemplate = "./templates/RP/RPmanifest.txt"
     var resourceManifest = fmt"./{works}/RP/"
     var resourceManifestFile = resourceManifest % "manifest.json"
-    var behaviourTemplate = "./templates/BPmanifest.txt"
+    var behaviourTemplate = "./templates/BP/BPmanifest.txt"
     var behaviourManifest = fmt"./{works}/BP/"
     var behaviourManifestFile = behaviourManifest % "manifest.json"
 
