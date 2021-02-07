@@ -3,7 +3,9 @@ import argparse
 import os
 import manifest
 import outputDir
+import packIcon
 import templates/dummyEntity
+import templates/basicBlock
 
 
 #define command line options
@@ -31,8 +33,14 @@ proc main(args: seq[string]) =
     for dummies in optGen.names:
       inc(nameNumber, 1)
       dummyEntity(dummies, root, optGen.outputDir, nameCount, nameNumber)
-   
+  
+  if optGen.templateGen == "basicBlock":
+    for blocks in optGen.names:
+      inc(nameNumber, 1)
+      basicBlock(blocks, root, optGen.outputDir, nameCount, nameNumber)
+
   manifest(optGen.outputDir, root)
+  packIcon(optGen.outputDir)
 
 #load program
 when isMainModule:
