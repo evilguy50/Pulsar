@@ -1,2 +1,2 @@
-pack.name=$works resource pack
+pack.name=$works behavior pack
 pack.description= generated with evil's addon generator
