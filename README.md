@@ -9,7 +9,7 @@ What this program can do so far:
 
 	run template for each name provided in a list.
 
-	generate addon for dummyEntity template.
+	generate addons based on templates.
 	
 To do:
 	
@@ -18,6 +18,7 @@ To do:
 template types:
 
 	dummyEntity :	Generates a dummy entity with no model / texture that can be used for map making.
+	basicBlock :	Generates a basic block. (all blocks use same template texture, all you have to do is change the textures ;P)
 	
 How to compile:
 	
