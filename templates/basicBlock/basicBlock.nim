@@ -32,7 +32,7 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #define blocks in BP
     os.setCurrentDir(root)
-    var bpBlockTemplate = "./templates/BP/basicBlock.txt"
+    var bpBlockTemplate = "./templates/basicBlock/BP/basicBlock.txt"
     var bpBlockName = fmt"./{works}/BP/blocks/{name}.json"
     var bpBlockRead = readFile(bpBlockTemplate)
     var bpBlockReplace = replace(bpBlockRead, "$name", name)
@@ -40,7 +40,7 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
     echo name, " saved as block ", name, ".json"
 
     #generate loot tables
-    var lootTemplate = "./templates/BP/basicBlock_loot.txt"
+    var lootTemplate = "./templates/basicBlock/BP/basicBlock_loot.txt"
     var lootFile = fmt"./{works}/BP/loot_tables/blocks/{name}.json"
     var lootRead = readFile(lootTemplate)
     var lootReplace = replace(lootRead, "$name", name)
@@ -48,8 +48,8 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
     echo name, " saved loottable for ", name, " as ", name, ".json"
 
     #generate block json for RP
-    var rpBlockTemplate = "./templates/RP/basicBlock.txt"
-    var rpBlockTemplateEntry = "./templates/RP/basicBlock_entry.txt"
+    var rpBlockTemplate = "./templates/basicBlock/RP/basicBlock.txt"
+    var rpBlockTemplateEntry = "./templates/basicBlock/RP/basicBlock_entry.txt"
     var rpBlockName = fmt"./{works}/RP/blocks.json"
     var newJson: bool = false
     var jsonReplaced: bool = false
@@ -84,8 +84,8 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #generate texture json
     var rpTextureName = fmt"./{works}/RP/textures/terrain_texture.json"
-    var rpTextureTemplate = "./templates/RP/basicBlock_texture.txt"
-    var rpTextureEntry = "./templates/RP/basicBlock_texture_entry.txt"
+    var rpTextureTemplate = "./templates/basicBlock/RP/basicBlock_texture.txt"
+    var rpTextureEntry = "./templates/basicBlock/RP/basicBlock_texture_entry.txt"
     var newTexture: bool = false
     if os.fileExists(rpTextureName) == false and nameNumber == 1:
         var textureRead = readFile(rpTextureTemplate)
@@ -110,7 +110,7 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
         close(textureEnd)
     echo name, " generated texture.json definition for ", name
     #generate textures
-    var iconFile = "./templates/RP/textures/evil.png"
+    var iconFile = "./templates/common/RP/textures/evil.png"
     var blockIconFile = fmt"./{works}/RP/textures/blocks/{name}.png"
     copyFile(iconFile, blockIconFile)
     echo name, " generated texture for block as ", name, ".png"
@@ -121,9 +121,9 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #generate BP language entries
     var bpLangFile = fmt"./{works}/BP/texts/en_US.lang"
-    var bpLangTemplate = "./templates/BP/texts/en_US.txt"
+    var bpLangTemplate = "./templates/common/BP/texts/en_US.txt"
     var bpLangJson = fmt"./{works}/BP/texts/languages.json"
-    var bpLangJsonTemplate = "./templates/BP/texts/languages.txt"
+    var bpLangJsonTemplate = "./templates/common/BP/texts/languages.txt"
     if os.fileExists(bpLangFile) == false:
         var bpLangRead = readFile(bpLangTemplate)
         var bpLangReplace = replace(bpLangRead, "$works", works)
@@ -135,9 +135,9 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #generate RP language entries
     var rpLangFile = fmt"./{works}/RP/texts/en_US.lang"
-    var rpLangTemplate = "./templates/RP/texts/en_US.txt"
+    var rpLangTemplate = "./templates/common/RP/texts/en_US.txt"
     var rpLangJson = fmt"./{works}/RP/texts/languages.json"
-    var rpLangJsonTemplate = "./templates/RP/texts/languages.txt"
+    var rpLangJsonTemplate = "./templates/common/RP/texts/languages.txt"
 
     if os.fileExists(rpLangFile) == false:
         var rpLangFileRead = readFile(rpLangTemplate)

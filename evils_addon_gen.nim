@@ -4,9 +4,9 @@ import os
 import manifest
 import outputDir
 import packIcon
-import templates/dummyEntity
-import templates/zombieEntity
-import templates/basicBlock
+import templates/dummyEntity/dummyEntity
+import templates/zombieEntity/zombieEntity
+import templates/basicBlock/basicBlock
 
 
 #define command line options
