@@ -1,0 +1,13 @@
+{
+	"format_version": "1.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "evil:$name",
+			"category": "Nature"
+		},
+		"components": {
+			"minecraft:icon": "$name",
+			"minecraft:render_offsets": "book"
+		}
+	}
+}

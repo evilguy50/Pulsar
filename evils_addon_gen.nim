@@ -4,9 +4,10 @@ import os
 import manifest
 import outputDir
 import packIcon
-import templates/dummyEntity/dummyEntity
-import templates/zombieEntity/zombieEntity
-import templates/basicBlock/basicBlock
+import templates/dummyEntity
+import templates/zombieEntity
+import templates/basicBlock
+import templates/basicItem
 
 
 #define command line options
@@ -31,9 +32,9 @@ proc main(args: seq[string]) =
 
 #generate dummy entities
   if optGen.templateGen == "zombieEntity":
-    for dummies in optGen.names:
+    for zombies in optGen.names:
       inc(nameNumber, 1)
-      zombieEntity(dummies, root, optGen.outputDir, nameCount, nameNumber)
+      zombieEntity(zombies, root, optGen.outputDir, nameCount, nameNumber)
 
   if optGen.templateGen == "dummyEntity":
     for dummies in optGen.names:
@@ -44,6 +45,11 @@ proc main(args: seq[string]) =
     for blocks in optGen.names:
       inc(nameNumber, 1)
       basicBlock(blocks, root, optGen.outputDir, nameCount, nameNumber)
+  
+  if optGen.templateGen == "basicItem":
+    for items in optGen.names:
+      inc(nameNumber, 1)
+      basicItem(items, root, optGen.outputDir, nameCount, nameNumber)
   
   manifest(optGen.outputDir, root)
   packIcon(optGen.outputDir)
