@@ -20,6 +20,7 @@ template types:
 	dummyEntity :	Generates a dummy entity with no model / texture that can be used for map making.
 	zombieEntity :	Generates a zombie that won't turn into a drowned.
 	basicBlock :	Generates a basic block. (all blocks use same template texture, all you have to do is change the textures ;P)
+	basicItem :	Generates a basic item. (it does nothing, but it can be used in other addons.)
 	
 How to compile:
 	
