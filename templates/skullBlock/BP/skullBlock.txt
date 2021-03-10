@@ -1,0 +1,105 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "evil:$name",
+      "properties": {
+        "evil:skull_rotation": [
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    },
+    "components": {
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "$name",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:destroy_time": 4,
+      "minecraft:loot": "loot_tables/blocks/$name.json",
+      "minecraft:map_color": "#AAAAAA",
+      "minecraft:block_light_absorption": 0,
+      "minecraft:geometry": "geometry.$name",
+      "minecraft:pick_collision": {
+        "size": [
+          8,
+          8,
+          8
+        ],
+        "origin": [
+          -4,
+          0,
+          -4
+        ]
+      },
+      "minecraft:entity_collision": {
+        "size": [
+          8,
+          8,
+          8
+        ],
+        "origin": [
+          -4,
+          0,
+          -4
+        ]
+      },
+      "minecraft:on_player_placing": {
+        "event": "set_placing_rotation"
+      }
+    },
+    "events": {
+      "set_placing_rotation": {
+        "set_block_property": {
+          "evil:skull_rotation": "query.cardinal_facing_2d-1"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_property('evil:skull_rotation') == 1",
+        "components": {
+          "minecraft:rotation": [
+            0,
+            180,
+            0
+          ]
+        }
+      },
+      {
+        "condition": "query.block_property('evil:skull_rotation') == 2",
+        "components": {
+          "minecraft:rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "condition": "query.block_property('evil:skull_rotation') == 3",
+        "components": {
+          "minecraft:rotation": [
+            0,
+            270,
+            0
+          ]
+        }
+      },
+      {
+        "condition": "query.block_property('evil:skull_rotation') == 4",
+        "components": {
+          "minecraft:rotation": [
+            0,
+            90,
+            0
+          ]
+        }
+      }
+    ]
+  }
+}
