@@ -1,0 +1,54 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:block": {
+        "description": {
+            "identifier": "evil:$name",
+            "is_experimental": true,
+            "register_to_creative_menu": true
+        },
+        "components": {
+            "minecraft:geometry": "geometry.$name",
+            "minecraft:loot": "loot_tables/blocks/$name.json",
+            "minecraft:destroy_time": 3,
+            "minecraft:explosion_resistance": 3,
+            "minecraft:friction": 0.6,
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            			"minecraft:material_instances": {
+				"*": {
+					"texture": "$name",
+					"render_method": "alpha_test"
+				}
+			},
+            "minecraft:pick_collision": {
+				"size": [
+					16,
+					8,
+					16
+				],
+				"origin": [
+					-8,
+					0,
+					-8
+				]
+			},
+			"minecraft:entity_collision": {
+				"size": [
+					16,
+					8,
+					16
+				],
+				"origin": [
+					-8,
+					0,
+					-8
+				]
+			},
+            "minecraft:map_color": "#FFFFFF",
+            "minecraft:block_light_absorption": 0,
+            "minecraft:block_light_emission": 0
+        }
+    }
+}

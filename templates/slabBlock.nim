@@ -5,7 +5,7 @@ import common/nameReplace
 import common/blockJson
 import common/langFiles
 
-proc basicBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+proc slabBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
     
     #create BP folders
     folderExist("BP")
@@ -17,6 +17,8 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #create RP folders
     folderExist("RP")
+    folderExist("RP/models")
+    folderExist("RP/models/entity")
     folderExist("RP/textures")
     folderExist("RP/textures/blocks")
     folderExist("RP/texts")
@@ -24,7 +26,7 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #define blocks in BP
     os.setCurrentDir(root)
-    var bpBlockTemplate = "./templates/basicBlock/BP/basicBlock.txt"
+    var bpBlockTemplate = "./templates/slabBlock/BP/slabBlock.txt"
     var bpBlockName = fmt"./{works}/BP/blocks/{name}.json"
     nameReplace(bpBlockTemplate, bpBlockName, name)
     echo name, " generated block as ", name, ".json"
@@ -49,7 +51,12 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
     rpLang(works, name, rpLang_entry)
     echo name, " generated lang entries for ", name
 
-    var blockTextureFile = "./templates/common/RP/textures/evil.png"
+    #generate block model
+    var slabModel_file = "./templates/slabBlock/RP/slabBlock_model.txt"
+    var slabModel_string = fmt"./{works}/RP/models/entity/{name}.json"
+    nameReplace(slabModel_file, slabModel_string, name)
+
+    var blockTextureFile = "./templates/slabBlock/RP/textures/slabBlock.png"
     var blockTextureString = fmt"./{works}/RP/textures/blocks/{name}.png"
     copyFile(blockTextureFile, blockTextureString)
     echo name, " generated texture as ", name, ".json"

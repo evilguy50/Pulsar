@@ -7,6 +7,7 @@ import packIcon
 import templates/dummyEntity
 import templates/zombieEntity
 import templates/basicBlock
+import templates/slabBlock
 import templates/basicItem
 
 
@@ -45,6 +46,11 @@ proc main(args: seq[string]) =
     for blocks in optGen.names:
       inc(nameNumber, 1)
       basicBlock(blocks, root, optGen.outputDir, nameCount, nameNumber)
+
+  if optGen.templateGen == "slabBlock":
+    for slabs in optGen.names:
+      inc(nameNumber, 1)
+      slabBlock(slabs, root, optGen.outputDir, nameCount, nameNumber)
   
   if optGen.templateGen == "basicItem":
     for items in optGen.names:
