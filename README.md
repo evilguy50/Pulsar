@@ -21,6 +21,7 @@ template types:
 	zombieEntity :	Generates a zombie that won't turn into a drowned.
 	basicBlock :	Generates a basic block. (all blocks use same template texture, all you have to do is change the textures ;P)
 	slabBlock :	Generates a slab block. (Note: custom block geometry is an experimental feature. So you need to enable experimental features in your world to use this.)
+	skullBlock:	Generates a player skull. (just swap out the default texture with your skin, Note: custom block geometry is an experimental feature. So you need to enable experimental features in your world to use this.)
 	basicItem :	Generates a basic item. (it does nothing, but it can be used in other addons.)
 	
 How to compile:
