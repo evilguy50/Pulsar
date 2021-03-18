@@ -23,6 +23,7 @@ template types:
 	slabBlock :	Generates a slab block. (Note: custom block geometry is an experimental feature. So you need to enable experimental features in your world to use this.)
 	skullBlock:	Generates a player skull. (just swap out the default texture with your skin, Note: custom block geometry is an experimental feature. So you need to enable experimental features in your world to use this.)
 	basicItem :	Generates a basic item. (it does nothing, but it can be used in other addons.)
+	fakeArmor :	Generates fake armor. (an item that applies a skin to the player when you apply the $name_armor tag. (example: test_armor))
 	
 How to compile:
 	
