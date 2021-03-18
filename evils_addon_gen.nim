@@ -10,6 +10,7 @@ import templates/basicBlock
 import templates/slabBlock
 import templates/skullBlock
 import templates/basicItem
+import templates/fakeArmor
 
 
 #define command line options
@@ -62,6 +63,11 @@ proc main(args: seq[string]) =
     for items in optGen.names:
       inc(nameNumber, 1)
       basicItem(items, root, optGen.outputDir, nameCount, nameNumber)
+
+  if optGen.templateGen == "fakeArmor":
+    for armor in optGen.names:
+      inc(nameNumber, 1)
+      fakeArmor(armor, root, optGen.outputDir, nameCount, nameNumber)
   
   manifest(optGen.outputDir, root)
   packIcon(optGen.outputDir)
