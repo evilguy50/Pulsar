@@ -17,13 +17,17 @@ To do:
 	
 template types:
 
-	dummyEntity :	Generates a dummy entity with no model / texture that can be used for map making.
-	zombieEntity :	Generates a zombie that won't turn into a drowned.
-	basicBlock :	Generates a basic block. (all blocks use same template texture, all you have to do is change the textures ;P)
-	slabBlock :	Generates a slab block. (Note: custom block geometry is an experimental feature. So you need to enable experimental features in your world to use this.)
-	skullBlock:	Generates a player skull. (just swap out the default texture with your skin, Note: custom block geometry is an experimental feature. So you need to enable experimental features in your world to use this.)
-	basicItem :	Generates a basic item. (it does nothing, but it can be used in other addons.)
-	fakeArmor :	Generates fake armor. (an item that applies a skin to the player when you apply the $name_armor tag. (example: test_armor))
+    All templates with a $ symbol in the description require experimental world features.
+    dummyEntity :	Generates a dummy entity with no model / texture that can be used for map making.
+    zombieEntity :	Generates a zombie that won't turn into a drowned. (uses standard zombie skin file)
+    basicBlock :	Generates a basic block.
+    slabBlock : $	Generates a slab block. 
+    skullBlock: $	Generates a player skull. (uses standard steve skin file)
+    basicItem :	Generates a basic item. (it does nothing, but it can be used in other addons.)
+    fakeArmor : Generates fake armor. (an item that applies a skin to the player when you apply the $name_armor tag. (example: test_armor))
+    lightBlock : Generates a block that lights up
+    placeCodeBlock : $ Generates a block that runs a function from the block when placed
+    playerCodeBlock : $ Generates a block that runs a function from the player that placed it
 	
 How to compile:
 	

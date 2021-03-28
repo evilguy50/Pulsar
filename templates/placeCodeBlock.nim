@@ -5,12 +5,13 @@ import common/nameReplace
 import common/blockJson
 import common/langFiles
 
-proc basicBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+proc placeCodeBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
     
     #create BP folders
     folderExist("BP")
     folderExist("BP/blocks")
     folderExist("BP/texts")
+    folderExist("BP/functions")
     folderExist("BP/loot_tables")
     folderExist("BP/loot_tables/blocks")
     echo "generated behaviour folders"
@@ -24,7 +25,7 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #define blocks in BP
     os.setCurrentDir(root)
-    var bpBlockTemplate = "./templates/basicBlock/BP/basicBlock.txt"
+    var bpBlockTemplate = "./templates/placeCodeBlock/BP/placeCodeBlock.txt"
     var bpBlockName = fmt"./{works}/BP/blocks/{name}.json"
     nameReplace(bpBlockTemplate, bpBlockName, name)
     echo name, " generated block as ", name, ".json"
@@ -34,6 +35,10 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
     var lootFile = fmt"./{works}/BP/loot_tables/blocks/{name}.json"
     nameReplace(lootTemplate, lootFile, name)
     echo name, " generated loottable as ", name, ".json"
+    
+    #generate function file
+    var functionFile = fmt"./{works}/BP/functions/{name}.mcfunction"
+    writeFile(functionFile, "")
 
     #generate block json for RP  
     var entry = "./templates/common/RP/block_json_entry.txt"

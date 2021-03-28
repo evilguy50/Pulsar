@@ -5,7 +5,7 @@ import common/nameReplace
 import common/blockJson
 import common/langFiles
 
-proc basicBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+proc lightBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
     
     #create BP folders
     folderExist("BP")
@@ -24,7 +24,7 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
 
     #define blocks in BP
     os.setCurrentDir(root)
-    var bpBlockTemplate = "./templates/basicBlock/BP/basicBlock.txt"
+    var bpBlockTemplate = "./templates/lightBlock/BP/lightBlock.txt"
     var bpBlockName = fmt"./{works}/BP/blocks/{name}.json"
     nameReplace(bpBlockTemplate, bpBlockName, name)
     echo name, " generated block as ", name, ".json"
@@ -36,8 +36,8 @@ proc basicBlock*(name: string, root: string, works: string, nameCount: int, name
     echo name, " generated loottable as ", name, ".json"
 
     #generate block json for RP  
-    var entry = "./templates/common/RP/block_json_entry.txt"
-    var base = "./templates/common/RP/block_json.txt"
+    var entry = "./templates/lightBlock/RP/blockEntry.txt"
+    var base = "./templates/lightBlock/RP/blockFile.txt"
     blockJson(works, name, nameNumber, nameCount, entry, base)
     echo name, " generated block entry for ", name
 

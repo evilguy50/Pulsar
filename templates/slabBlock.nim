@@ -38,7 +38,9 @@ proc slabBlock*(name: string, root: string, works: string, nameCount: int, nameN
     echo name, " generated loottable as ", name, ".json"
 
     #generate block json for RP  
-    blockJson(works, name, nameNumber, nameCount)
+    var entry = "./templates/common/RP/block_json_entry.txt"
+    var base = "./templates/common/RP/block_json.txt"
+    blockJson(works, name, nameNumber, nameCount, entry, base)
     echo name, " generated block entry for ", name
 
     #generate texture json

@@ -17,7 +17,7 @@
             },
             "minecraft:map_color": "#FFFFFF",
             "minecraft:block_light_absorption": 0,
-            "minecraft:block_light_emission": 0.00
+            "minecraft:block_light_emission": 1.00
         }
     }
 }

@@ -3,16 +3,14 @@ import strutils
 import strformat
 import nameReplace
 
-proc blockJson*(works: string, name: string, nameNumber: int, nameCount: int)=
+proc blockJson*(works: string, name: string, nameNumber: int, nameCount: int, entry: string, baseFile: string)=
 
     var newJson: bool = false
     var jsonReplaced: bool = false
-    var templateFile = "./templates/common/RP/block_json.txt"
-    var templateEntry = "./templates/common/RP/block_json_entry.txt" 
     var rpBlockName = fmt"./{works}/RP/blocks.json"
 
     if os.fileExists(rpBlockName) == false and nameNumber == 1:
-        nameReplace(templateFile, rpBlockName, name)
+        nameReplace(baseFile, rpBlockName, name)
         newJson = true
     if newJson == false and nameNumber == 1:
         var rpBlockRead2 = readFile(rpBlockName)
@@ -28,7 +26,7 @@ proc blockJson*(works: string, name: string, nameNumber: int, nameCount: int)=
         jsonReplaced = true
     if nameNumber > 1 or jsonReplaced == true:
         var rpBlockEntry = open(rpBlockName, fmAppend)
-        var rpBlockRead3 = readFile(templateEntry)
+        var rpBlockRead3 = readFile(entry)
         var rpBlockEntryReplace = replace(rpBlockRead3, "$name", name)
         write(rpBlockEntry, rpBlockEntryReplace)
         close(rpBlockEntry)
@@ -43,10 +41,10 @@ proc terrainJson*(works: string, name: string, nameNumber: int, nameCount: int)=
 
     var rpTextureName = fmt"./{works}/RP/textures/terrain_texture.json"
     var newTexture: bool = false
-    var templateFile = "./templates/common/RP/block_texture.txt"
-    var templateEntry = "./templates/common/RP/block_texture_entry.txt"
+    var baseFile = "./templates/common/RP/block_texture.txt"
+    var entry = "./templates/common/RP/block_texture_entry.txt"
     if os.fileExists(rpTextureName) == false and nameNumber == 1:
-        var textureRead = readFile(templateFile)
+        var textureRead = readFile(baseFile)
         var textureReplace = replace(textureRead, "$name", name)
         var textureReplaceTitle = replace(textureReplace, "$works", works)
         writeFile(rpTextureName, textureReplaceTitle)
@@ -57,7 +55,7 @@ proc terrainJson*(works: string, name: string, nameNumber: int, nameCount: int)=
         os.removeFile(rpTextureName)
         writeFile(rpTextureName, textureReplace2)
     if newTexture == false or nameNumber > 1:
-        var textureEntryRead = readFile(templateEntry)
+        var textureEntryRead = readFile(entry)
         var textureEntryReplace = replace(textureEntryRead, "$name", name)
         var textureEntryFile = open(rpTextureName, fmAppend)
         write(textureEntryFile, textureEntryReplace)
