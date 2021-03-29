@@ -48,7 +48,8 @@ nim dependencies:
 	
 usage:
 	
-	./evils_addon_gen -o outputdirname -t templatename names
+	linux: ./evils_addon_gen -o outputdirname -t templatename names
+	windows: .\evils_addon_gen.exe -o outputdirname -t templatename names
 	
 	
 Open source licenses used:
