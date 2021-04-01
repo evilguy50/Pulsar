@@ -1,20 +1,6 @@
 #import dependencies
-import argparse
-import os
-import manifest
-import outputDir
-import packIcon
-import templates/dummyEntity
-import templates/zombieEntity
-import templates/basicBlock
-import templates/lightBlock
-import templates/placeCodeBlock
-import templates/playerCodeBlock
-import templates/slabBlock
-import templates/skullBlock
-import templates/basicItem
-import templates/fakeArmor
-
+import libList
+import templateList
 
 #define command line options
 proc main(args: seq[string]) =

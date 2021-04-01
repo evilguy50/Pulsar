@@ -1,0 +1,104 @@
+How to make a block template:
+
+create a .nim file in the root of the templates directory.
+
+create a folder with the the same name as the template.
+
+create the main behaviour pack block json in a BP folder inside your template folder.
+instead of adding a block name simply put $name and the generator will take care of it.
+
+example:
+make sure you rename it as a .txt file.
+
+    {
+        "format_version": "1.12.0",
+        "minecraft:block": {
+            "description": {
+                "identifier": "evil:$name",
+                "is_experimental": false,
+                "register_to_creative_menu": true
+            },
+            "components": {
+                "minecraft:loot": "loot_tables/blocks/$name.json",
+                "minecraft:destroy_time": 3,
+                "minecraft:explosion_resistance": 3,
+                "minecraft:friction": 0.6,
+                "minecraft:flammable": {
+                    "flame_odds": 0,
+                    "burn_odds": 0
+                },
+                "minecraft:map_color": "#FFFFFF",
+                "minecraft:block_light_absorption": 0,
+                "minecraft:block_light_emission": 0.00
+            }
+        }
+    }
+
+you need to make sound entries for the RP block json if you want your block breaking sound to be different than the defaults.
+the current default options are "stone", or "glass".
+
+main sound example:
+make sure you rename it as a .txt file.
+
+    {
+        "format_version": [
+            1,
+            1,
+            0
+        ],
+        "evil:$name": {"textures": "$name", "sound": "stone"}
+
+entry sound example:
+make sure you rename it as a .txt file.
+
+    ,    "evil:$name": {"textures": "$name", "sound": "stone"}
+
+in your nim file use this example if you want to make a block template without custom geometry.
+
+
+    import common/blockTemplate
+
+    proc templateName*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+        var mainJson = "./templates/templateName/BP/templateName.txt"
+        # if you didn't make new block json entries you can use the default values of "stone", or "stone"
+        # note: all paths are local paths starting from the root of the addon generator.
+        var soundJson = "add this variable with the path to your sound json"
+        var soundJsonEntry = "add this variable with the path to your sound json entry"
+        #if you added function support to your mainJson set the last value to true
+        blockTemplate(name, root, works, nameCount, nameNumber, mainJson, soundJson, soundJsonEntry, false)
+        return
+
+add your geometry file and your geometryTexture to your template folder.
+remember to change identifier names to $name .
+make sure you rename the geometry as a .txt file.
+
+in your nim file use this example if you're using a custom geometry.
+
+    import common/blockTemplate
+
+    proc templateName*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+        var mainJson = "./templates/templateName/BP/templateName.txt"
+        # if you didn't make new block json entries you can use the default values of "stone", or "stone"
+        # note: all paths are local paths starting from the root of the addon generator.
+        var soundJson = "add this variable with the path to your sound json"
+        var soundJsonEntry = "add this variable with the path to your sound json entry"
+        #if you added function support to your mainJson set the last value to true
+        var geometry = "path to your geometry file"
+        var geometryTexture = "path to your geometryTexture"
+        blockTemplate(name, root, works, nameCount, nameNumber, mainJson, soundJson, soundJsonEntry, geometry, geometryTexture, false)
+        return
+
+in the root of the addon generator folder add this example to templateList.nim.
+
+    include templates/templateName
+
+now finally add this example to evils_addon_generator.nim before the manifest() proc.
+#you can replace uniqueVariable with any name that hasn't already been used. (No spaces or special characters. and the first letter needs to be lowercase)
+
+  if optGen.templateGen == "templateName":
+    for uniqueVariable in optGen.names:
+      inc(nameNumber, 1)
+      templateName(uniqueVariable, root, optGen.outputDir, nameCount, nameNumber)
+
+when you're done with your template you need to recompile the generator.
+information on how to compile is in the readme file.
