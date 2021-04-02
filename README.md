@@ -28,6 +28,7 @@ template types:
     playerCodeBlock : $ Generates a block that runs a function from the player that placed it
 	
 How to compile:
+
 	linux: nim compile ./evils_addon_gen.nim
 	windows: nim compile .\evils_addon_gen.nim
 
