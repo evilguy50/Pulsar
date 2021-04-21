@@ -22,7 +22,6 @@ template types:
     slabBlock : $	Generates a slab block. 
     skullBlock: $	Generates a player skull. (uses standard steve skin file)
     basicItem :	Generates a basic item. (it does nothing, but it can be used in other addons.)
-    fakeArmor : Generates fake armor. (an item that applies a skin to the player when you apply the $name_armor tag. (example: test_armor))
     lightBlock : Generates a block that lights up
     placeCodeBlock : $ Generates a block that runs a function from the block when placed
     playerCodeBlock : $ Generates a block that runs a function from the player that placed it
@@ -50,6 +49,10 @@ usage:
 	linux: ./evils_addon_gen -o outputdirname -t templatename names
 	windows: .\evils_addon_gen.exe -o outputdirname -t templatename names
 	
+how to use dynamic templates:
+
+	linux: ./evils_addon_gen -o outputdirname -t templatename -b basename names
+	windows: .\evils_addon_gen.exe -o outputdirname -t templatename -b basename names
 	
 Open source licenses used:
 
