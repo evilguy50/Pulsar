@@ -13,6 +13,17 @@ proc main(args: seq[string]) =
     #im using my own help flag.
     option("-t", "--templateGen")
     option("-o", "--outputDir")
+    option("-b", "--base")
+    option("--mainJson")
+    option("--resourceJson")
+    option("--mainSound")
+    option("--soundEntry")
+    option("--geometry")
+    option("--geometryTexture")
+    option("--itemTexture")
+    option("--loot")
+    option("--render")
+    flag("--useFunction")
     flag("-l", "--list")
     flag("-h", "--help")
     arg("names", nargs = -1)
@@ -52,7 +63,8 @@ proc main(args: seq[string]) =
   var root: string = os.getCurrentDir() % "/"
   setOutput(optGen.outputDir)
 
-#generate dummy entities
+
+  #standard templates
   if optGen.templateGen == "zombieEntity":
     for zombies in optGen.names:
       inc(nameNumber, 1)
@@ -98,11 +110,37 @@ proc main(args: seq[string]) =
       inc(nameNumber, 1)
       basicItem(items, root, optGen.outputDir, nameCount, nameNumber)
 
-  if optGen.templateGen == "fakeArmor":
-    for armor in optGen.names:
+  if optGen.templateGen == "stairBlock":
+    for stairs in optGen.names:
       inc(nameNumber, 1)
-      fakeArmor(armor, root, optGen.outputDir, nameCount, nameNumber)
-  
+      stairBlock(stairs, root, optGen.outputDir, nameCount, nameNumber)
+
+  #dynamic templates
+  if optGen.templateGen == "tempBlock":
+    for temp_block in optGen.names:
+      inc(nameNumber, 1)
+      tempBlock(temp_block, root, optGen.outputDir, nameCount, nameNumber, optGen.mainJson,
+       optGen.mainSound, optGen.soundEntry, optGen.useFunction, optGen.base)
+
+  if optGen.templateGen == "tempBlock_geo":
+    for temp_blockGeo in optGen.names:
+      inc(nameNumber, 1)
+      tempBlockGeo(temp_blockGeo, root, optGen.outputDir, nameCount, nameNumber, optGen.mainJson,
+       optGen.mainSound, optGen.soundEntry, optGen.geometry, optGen.geometryTexture,
+        optGen.useFunction, optGen.base)
+    
+  if optGen.templateGen == "tempEntity":
+    for temp_entity in optGen.names:
+      inc(nameNumber, 1)
+      tempEntity(temp_entity, root, optGen.outputDir, nameCount, nameNumber, optGen.mainJson, optGen.resourceJson,
+       optGen.geometry, optGen.geometryTexture, optGen.loot, optGen.render, optGen.base)
+
+  if optGen.templateGen == "tempItem":
+    for temp_item in optGen.names:
+      inc(nameNumber, 1)
+      tempItem(temp_item, root, optGen.outputDir, nameCount, nameNumber, optGen.mainJson, optGen.resourceJson,
+      optGen.itemTexture, optGen.base)
+
   manifest(optGen.outputDir, root)
   packIcon(optGen.outputDir)
 

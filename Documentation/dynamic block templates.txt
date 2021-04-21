@@ -1,0 +1,5 @@
+Make a block addon, then put your existing json in the correct folders renamed as a .txt file.
+Make sure that all of the txt files have the same name. including the .png images
+inside all of your json make sure you swap out the identifiers to look like this:
+	original: minecraft:example
+	changed:  evil:$name
