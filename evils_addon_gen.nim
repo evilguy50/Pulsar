@@ -110,6 +110,11 @@ proc main(args: seq[string]) =
       inc(nameNumber, 1)
       basicItem(items, root, optGen.outputDir, nameCount, nameNumber)
 
+  if optGen.templateGen == "funcItem":
+    for funcItem in optGen.names:
+      inc(nameNumber, 1)
+      funcItem(funcItem, root, optGen.outputDir, nameCount, nameNumber)
+
   if optGen.templateGen == "stairBlock":
     for stairs in optGen.names:
       inc(nameNumber, 1)

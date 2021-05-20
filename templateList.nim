@@ -13,6 +13,7 @@ include templates/stairBlock
 
 #item templates
 include templates/basicItem
+include templates/funcItem
 
 #dynamic templates
 include templates/tempBlock
