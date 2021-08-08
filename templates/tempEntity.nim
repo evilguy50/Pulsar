@@ -2,28 +2,18 @@ import common/entityTemplate
 import strformat
 import os
 
-proc tempEntity*(name: string, root: string, works: string, nameCount: int, nameNumber: int,
- mainJson: string, resourceJson: string, geometry: string, geometryTexture: string,
-  loot: string, render: string, baseName: string)=
+proc tempEntity*(name: string, root: string, works: string, nameCount: int, nameNumber: int, baseName: string)=
   os.setCurrentDir(root)
-  var mainJson2 = mainJson
-  var resourceJson2 = resourceJson
-  var loot2 = loot
-  var geometry2 = geometry
-  var geometryTexture2 = geometryTexture
-  var render2 = render
-  if baseName != "":
-      if mainJson == "":
-        mainJson2 = fmt"./User_templates/Entities/entity/BP/{baseName}.txt"
-      if resourceJson == "":
-        resourceJson2 = fmt"./User_templates/Entities/entity/RP/{baseName}.txt"
-      if loot == "":
-        loot2 = fmt"./User_templates/Entities/loot/{baseName}.txt"
-      if geometry == "":
-        geometry2 = fmt"./User_templates/Entities/geometry/{baseName}.txt"
-      if geometryTexture == "":
-        geometryTexture2 = fmt"./User_templates/Entities/geometry/textures/{baseName}.png"
-      if render == "":
-        render2 = fmt"./User_templates/Entities/render/{baseName}.txt"
+  var mainJson = fmt"./User_templates/Entities/entity/BP/{baseName}.txt"
+  var resourceJson = fmt"./User_templates/Entities/entity/RP/{baseName}.txt"
+  var loot = fmt"./User_templates/Entities/optional/loot/{baseName}.txt"
+  var geometry = fmt"./User_templates/Entities/geometry/{baseName}.txt"
+  var geometryTexture = fmt"./User_templates/Entities/geometry/textures/{baseName}.png"
+  var render = fmt"./User_templates/Entities/render/{baseName}.txt"
+  var trades = fmt"./User_templates/optional/trades/{baseName}.txt"
+  if os.fileExists(loot) == false:
+    loot = "none"
+  if os.fileExists(trades) == false:
+    trades = "none"
   os.setCurrentDir(works)
-  entityTemplate(name, root, works, nameCount, nameNumber, geometry2, render2, geometryTexture2, loot2, mainJson2, resourceJson2)
+  entityTemplate(name, root, works, nameCount, nameNumber, geometry, render, geometryTexture, loot, mainJson, resourceJson, trades)

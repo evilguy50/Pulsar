@@ -1,24 +1,22 @@
 import common/itemTemplate
 import strformat
+import strutils
 import os
 
-proc tempItem*(name: string, root: string, works: string, nameCount: int, nameNumber: int, mainJson: string, resourceJson: string,
- itemTexture: string, baseName: string)=
+proc tempItem*(name: string, root: string, works: string, nameCount: int, nameNumber: int, baseName: string)=
     os.setCurrentDir(root)
-    var mainJson2 = mainJson
-    var resourceJson2 = resourceJson
-    var itemTexture2 = itemTexture
-    if baseName != "":
-        if mainJson == "":
-            mainJson2 = fmt"./User_templates/Items/items/BP/{baseName}.txt"
-        if resourceJson == "":
-            resourceJson2 = fmt"./User_templates/Items/items/RP/{baseName}.txt"
-        if itemTexture == "":
-            var textureCheck = fmt"./User_templates/Items/texture/{baseName}.png"
-            if os.fileExists(textureCheck) == false:
-                itemTexture2 = "./templates/common/RP/textures/evil.png"
-            else:
-                itemTexture2 = textureCheck
+    var mainJson = fmt"./User_templates/Items/items/BP/{baseName}.txt"
+    var resourceJson = fmt"./User_templates/Items/items/RP/{baseName}.txt"
+    var textureCheck = fmt"./User_templates/Items/texture/{baseName}.png"
+    var itemTexture = textureCheck
+    if os.fileExists(textureCheck) == false:
+        itemTexture = "./templates/common/RP/textures/evil.png"
     os.setCurrentDir(works)
-    itemTemplate(name, root, works, nameCount, nameNumber, mainJson2, resourceJson2, itemTexture2)
+    itemTemplate(name, root, works, nameCount, nameNumber, mainJson, resourceJson, itemTexture)
+
+    var langJson = "./RP/texts/en_US.lang"
+    var langRead = readFile(langJson)
+    var langReplace = replace(langRead, fmt"item.evil:{name}.name={name}", fmt"item.evil:{name}={name}")
+    os.removeFile(langJson)
+    writeFile(langJson, langReplace)
     return

@@ -1,0 +1,42 @@
+DONE
+blocks
+	basic block
+	light block
+	crafting block
+	place code block
+	player code block
+	skull block
+	slab block
+	stair block
+items
+	old item
+	new item
+	func item
+entities
+	dummy entity
+	zombie entity
+
+
+
+TO DO
+blocks
+	tick toggle block
+	tick stand block
+	interact block
+	destroy block
+items
+	sword item
+	food item
+	armor
+		boot
+		leg
+		chest
+		head
+	tools
+		pickaxe
+		shovel
+		axe
+		hoe
+		bow/arrow
+entities
+	all vanilla mobs

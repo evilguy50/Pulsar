@@ -1,0 +1,2 @@
+new_item: the first 2 names provided are used as the category and item group values. 
+if you don't want to specify either of them set them to "none".

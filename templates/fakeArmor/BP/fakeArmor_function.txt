@@ -1,3 +1,0 @@
-execute @a[tag=$name_armor] ~ ~ ~ replaceitem entity @s slot.armor.head 0 evil:$name_armor 1 0 {"item_lock":{"mode": "lock_in_slot"}}
-execute @a[tag=$name_armor] ~ ~ ~ effect @s invisibility 2 1 true
-execute @a[tag=!$name_armor] ~ ~ ~ clear @s evil:$name_armor

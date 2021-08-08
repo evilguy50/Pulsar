@@ -6,7 +6,7 @@ import langFiles
 import textureJson
 
 proc entityTemplate*(name: string, root: string, works: string, nameCount: int, nameNumber: int, model: string, renderController: string,
- texture: string, loot: string, mainJson: string, resourceJson: string)=
+ texture: string, loot: string, mainJson: string, resourceJson: string, trades: string)=
 
   #setup BP folders
   folderExist("BP")
@@ -15,6 +15,8 @@ proc entityTemplate*(name: string, root: string, works: string, nameCount: int, 
   if loot != "none":
     folderExist("BP/loot_tables")
     folderExist("BP/loot_tables/entities")
+  if trades != "none":
+    folderExist("BP/trading")
   echo "generated behaviour folders"
 
   #setup RP folders 
@@ -39,9 +41,14 @@ proc entityTemplate*(name: string, root: string, works: string, nameCount: int, 
 
   #generate loot tables
   if loot != "none":
-    var zombieLootString = fmt"./{works}/BP/loot_tables/entities/{name}.json"
-    copyFile(loot, zombieLootString)
+    var lootString = fmt"./{works}/BP/loot_tables/entities/{name}.json"
+    copyFile(loot, lootString)
     echo name, " generated loottable as ", name, ".json"
+
+  if trades != "none":
+    var tradeString = fmt"./{works}/BP/trading/{name}.json"
+    nameReplace(trades, tradeString, name)
+    echo (name, " generated trade table as ", name, ".json")
 
   #generate RP entities
   var resourceEntity = fmt"./{works}/RP/entity/{name}.json"

@@ -37,3 +37,4 @@ proc textureJson*(works: string, name: string, nameNumber: int, nameCount:int, t
         var textureJsonPopulate2 = open(textureJsonTemplate, fmAppend)
         var textureEnd = "}}"
         write(textureJsonPopulate2, textureEnd)
+        close(textureJsonPopulate2)

@@ -7,5 +7,5 @@ proc zombieEntity*(name: string, root: string, works: string, nameCount: int, na
   var renderController = "./templates/zombieEntity/RP/zombieEntity_render.txt"
   var texture = "./templates/zombieEntity/RP/textures/zombieEntity.png"
   var loot = "./templates/zombieEntity/BP/zombieEntity_loot.txt"
-  entityTemplate(name, root, works, nameCount, nameNumber, model, renderController, texture, loot, mainJson, resourceJson)
+  entityTemplate(name, root, works, nameCount, nameNumber, model, renderController, texture, loot, mainJson, resourceJson, "none")
   return

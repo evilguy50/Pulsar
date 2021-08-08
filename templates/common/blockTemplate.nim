@@ -48,10 +48,12 @@ proc blockTemplate*(name: string, root: string, works: string, nameCount: int,
     nameReplace(lootTemplate, lootFile, name)
     echo name, " generated loottable as ", name, ".json"
 
+    os.setCurrentDir(works)
     if function == true:
        folderExist("BP/functions")
-       var functionFile = fmt"./{works}/BP/functions/{name}.mcfunction"
+       var functionFile = fmt"./BP/functions/{name}.mcfunction"
        writeFile(functionFile, "")
+    os.setCurrentDir(root)
 
     #generate block json for RP
     blockJson(works, name, nameNumber, nameCount, soundJsonEntry2, soundJson2)
