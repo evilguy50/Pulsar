@@ -37,6 +37,11 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
     for dummies in names:
       inc(nameNumber, 1)
       dummyEntity(dummies, root, outputDir, nameCount, nameNumber)
+
+  if templateGen == "base_entity":
+    for baseEnt in names:
+      inc(nameNumber, 1)
+      baseEntity(baseEnt, root, outputDir, nameCount, nameNumber)
   
   if templateGen == "basic_block":
     for blocks in names:
@@ -139,20 +144,8 @@ proc cli(args: seq[string]) =
     echo ".\\evils_addon_cli.exe -o (name of output folder) -t (template to use) (list of names)\n"
     quit("run it with -l to list all templates", 0)
   if optGen.list:
-    echo "All templates with a $ symbol in the description require experimental world features.\n\n"
-    echo "dummy_entity :	Generates a dummy entity with no model / texture that can be used for map making.\n"
-    echo "zombie_entity :	Generates a zombie that won't turn into a drowned. (uses standard zombie skin file)\n"
-    echo "basic_block :	Generates a basic block.\n"
-    echo "slab_block : $	Generates a slab block. \n"
-    echo "stair_block : $	Generates a stair block. \n"
-    echo "skull_block: $	Generates a player skull. (uses standard steve skin file)\n"
-    echo "old_item :	Generates a basic item. (it does nothing, but it can be used in other addons.)\n"
-    echo "new_item : $	Generates a basic item. (it does nothing, but it can be used in other addons.)\n supports 1.16.100+ features\n"
-    echo "func_item : $ Generates an item that runs a function when used (item not consumed. add that to your function if you want it to be)"
-    echo "light_block : Generates a block that lights up\n"
-    echo "place_code_block : $ Generates a block that runs a function from the block when placed\n"
-    echo "player_code_block : $ Generates a block that runs a function from the player that placed it\n"
-    echo "crafting_block : $ Generates a new crafting table (only crafts recipes made for the specific table)"
+    var templateInfo = readFile("./template_info.txt")
+    echo templateInfo
     quit("run any of these templates with the -t option", 0)
   if optGen.help == false and optGen.list == false:
     var nameList: string = optGen.names[0]

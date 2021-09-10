@@ -1,5 +1,6 @@
 #entity templates
 include templates/dummyEntity
+include templates/baseEntity
 include templates/zombieEntity
 
 #block templates

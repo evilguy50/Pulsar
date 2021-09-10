@@ -44,10 +44,10 @@ const temp_keyMax*: cint = 100
 const temp_key_1*: cint = temp_keyMax + 1
 var temp_chars*: array[temp_key_1, char]
 
-var templateList*: array[13, string] = ["basic_block", "light_block", "crafting_block (exp mode)", "place_code_block (exp mode)",
+var templateList*: array[14, string] = ["basic_block", "light_block", "crafting_block (exp mode)", "place_code_block (exp mode)",
  "player_code_block (exp mode)", "skull_block (exp mode)", "slab_block (exp mode)", "stair_block (exp mode)",
- "old_item", "func_item (exp mode)", "new_item (exp mode)", "dummy_entity", "zombie_entity"]
+ "old_item", "func_item (exp mode)", "new_item (exp mode)", "dummy_entity", "base_entity", "zombie_entity"]
 
-var templateCheckList*: array[13, string] = ["basic_block", "light_block", "crafting_block", "place_code_block",
+var templateCheckList*: array[14, string] = ["basic_block", "light_block", "crafting_block", "place_code_block",
  "player_code_block", "skull_block", "slab_block", "stair_block",
- "old_item", "func_item", "new_item", "dummy_entity", "zombie_entity"]
+ "old_item", "func_item", "new_item", "dummy_entity", "base_entity", "zombie_entity"]
