@@ -124,7 +124,8 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
       for i in names:
         inc(nameNumber, 1)
         tempItem(i, root, outputDir, nameCount, nameNumber, templateGen)
-
+        
+  os.setCurrentDir(root)
   manifest(outputDir, root)
   packIcon(outputDir)
 
