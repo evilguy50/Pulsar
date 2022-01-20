@@ -1,5 +1,0 @@
-{
-	"resource_pack_name": "$works",
-	"texture_name": "atlas.items",
-	"texture_data": {
-		"$name":{"textures": "textures/items/egg/$name"}

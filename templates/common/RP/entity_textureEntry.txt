@@ -1,1 +1,0 @@
-, "$name":{"textures": "textures/items/egg/$name"}

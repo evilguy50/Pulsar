@@ -1,6 +1,6 @@
 import common/blockTemplate
 
-proc lightBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+proc lightBlock*(name: string, root: string, works: string)=
     var mainJson = "./templates/lightBlock/BP/lightBlock.txt"
-    blockTemplate(name, root, works, nameCount, nameNumber, mainJson, "glass", "glass", false)
+    blockTemplate(name, root, works, mainJson, "glass", false)
     return

@@ -2,7 +2,7 @@ import common/entityTemplate
 import strformat
 import os
 
-proc tempEntity*(name: string, root: string, works: string, nameCount: int, nameNumber: int, baseName: string)=
+proc tempEntity*(name: string, root: string, works: string, baseName: string)=
   os.setCurrentDir(root)
   var mainJson = fmt"./User_templates/Entities/entity/BP/{baseName}.txt"
   var resourceJson = fmt"./User_templates/Entities/entity/RP/{baseName}.txt"
@@ -16,4 +16,4 @@ proc tempEntity*(name: string, root: string, works: string, nameCount: int, name
   if os.fileExists(trades) == false:
     trades = "none"
   os.setCurrentDir(works)
-  entityTemplate(name, root, works, nameCount, nameNumber, geometry, render, geometryTexture, loot, mainJson, resourceJson, trades)
+  entityTemplate(name, root, works, geometry, render, geometryTexture, loot, mainJson, resourceJson, trades)

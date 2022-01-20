@@ -5,7 +5,7 @@ import nameReplace
 import langFiles
 import textureJson
 
-proc entityTemplate*(name: string, root: string, works: string, nameCount: int, nameNumber: int, model: string, renderController: string,
+proc entityTemplate*(name: string, root: string, works: string, model: string, renderController: string,
  texture: string, loot: string, mainJson: string, resourceJson: string, trades: string)=
 
   #setup BP folders
@@ -92,7 +92,7 @@ proc entityTemplate*(name: string, root: string, works: string, nameCount: int, 
   echo ("added language entry for spawnegg ", name)
 
   # generate texture json
-  textureJson(works, name, nameNumber, nameCount, "entity")
+  textureJson(works, name, "entity")
   echo name, " generated texture entry for ", name
   os.setCurrentDir(works)
 

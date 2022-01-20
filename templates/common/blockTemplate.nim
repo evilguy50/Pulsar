@@ -5,22 +5,8 @@ import nameReplace
 import blockJson
 import langFiles
 
-proc blockTemplate*(name: string, root: string, works: string, nameCount: int,
- nameNumber: int, mainJson: string, soundJson: string, soundJsonEntry: string, function: bool)=
-    var soundJson2 = soundJson
-    var soundJsonEntry2 = soundJsonEntry
-    case soundJson:
-    of "stone":
-       soundJson2 = "./templates/common/RP/stone_blockSound.txt"
-    of "glass":
-       soundJson2 = "./templates/common/RP/glass_blockSound.txt"
-    case soundJsonEntry:
-    of "stone":
-       soundJsonEntry2 = "./templates/common/RP/stone_blockSound_entry.txt"
-    of "glass":
-       soundJsonEntry2 = "./templates/common/RP/glass_blockSound_entry.txt"
-
-
+proc blockTemplate*(name: string, root: string, works: string,
+ mainJson: string, soundJson: string,function: bool)=
     #create BP folders
     folderExist("BP")
     folderExist("BP/blocks")
@@ -56,11 +42,11 @@ proc blockTemplate*(name: string, root: string, works: string, nameCount: int,
     os.setCurrentDir(root)
 
     #generate block json for RP
-    blockJson(works, name, nameNumber, nameCount, soundJsonEntry2, soundJson2)
+    blockJson(works, name, soundJson)
     echo name, " generated block entry for ", name
 
     #generate texture json
-    terrainJson(works, name, nameNumber, nameCount)
+    terrainJson(works, name)
     echo name, " generated texture entry for ", name
 
     #generate language files
@@ -77,20 +63,8 @@ proc blockTemplate*(name: string, root: string, works: string, nameCount: int,
     os.setCurrentDir(works)
     return
 
-proc blockTemplate*(name: string, root: string, works: string, nameCount: int,
- nameNumber: int, mainJson: string, soundJson: string, soundJsonEntry: string, geometry: string, geometryTexture: string, function: bool)=
-    var soundJson2 = soundJson
-    var soundJsonEntry2 = soundJsonEntry
-    case soundJson:
-    of "stone":
-       soundJson2 = "./templates/common/RP/stone_blockSound.txt"
-    of "glass":
-       soundJson2 = "./templates/common/RP/glass_blockSound.txt"
-    case soundJsonEntry:
-    of "stone":
-       soundJsonEntry2 = "./templates/common/RP/stone_blockSound_entry.txt"
-    of "glass":
-       soundJsonEntry2 = "./templates/common/RP/glass_blockSound_entry.txt"
+proc blockTemplate*(name: string, root: string, works: string,
+ mainJson: string, soundJson: string, geometry: string, geometryTexture: string, function: bool)=
     var geometryTexture2 = geometryTexture
     if geometryTexture == "evil":
        geometryTexture2 = "./templates/common/RP/textures/evil.png"
@@ -130,11 +104,11 @@ proc blockTemplate*(name: string, root: string, works: string, nameCount: int,
        writeFile(functionFile, "")
 
     #generate block json for RP
-    blockJson(works, name, nameNumber, nameCount, soundJsonEntry2, soundJson2)
+    blockJson(works, name, soundJson)
     echo name, " generated block entry for ", name
 
     #generate texture json
-    terrainJson(works, name, nameNumber, nameCount)
+    terrainJson(works, name)
     echo name, " generated texture entry for ", name
 
     #generate language files

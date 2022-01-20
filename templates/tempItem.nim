@@ -3,7 +3,7 @@ import strformat
 import strutils
 import os
 
-proc tempItem*(name: string, root: string, works: string, nameCount: int, nameNumber: int, baseName: string)=
+proc tempItem*(name: string, root: string, works: string, baseName: string)=
     os.setCurrentDir(root)
     var mainJson = fmt"./User_templates/Items/items/BP/{baseName}.txt"
     var resourceJson = fmt"./User_templates/Items/items/RP/{baseName}.txt"
@@ -12,11 +12,10 @@ proc tempItem*(name: string, root: string, works: string, nameCount: int, nameNu
     if os.fileExists(textureCheck) == false:
         itemTexture = "./templates/common/RP/textures/evil.png"
     os.setCurrentDir(works)
-    itemTemplate(name, root, works, nameCount, nameNumber, mainJson, resourceJson, itemTexture)
+    itemTemplate(name, root, works, mainJson, resourceJson, itemTexture)
 
     var langJson = "./RP/texts/en_US.lang"
     var langRead = readFile(langJson)
     var langReplace = replace(langRead, fmt"item.evil:{name}.name={name}", fmt"item.evil:{name}={name}")
-    os.removeFile(langJson)
     writeFile(langJson, langReplace)
     return

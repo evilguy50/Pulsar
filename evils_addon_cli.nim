@@ -31,73 +31,73 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
   if templateGen == "zombie_entity":
     for zombies in names:
       inc(nameNumber, 1)
-      zombieEntity(zombies, root, outputDir, nameCount, nameNumber)
+      zombieEntity(zombies, root, outputDir)
 
   if templateGen == "dummy_entity":
     for dummies in names:
       inc(nameNumber, 1)
-      dummyEntity(dummies, root, outputDir, nameCount, nameNumber)
+      dummyEntity(dummies, root, outputDir)
 
   if templateGen == "base_entity":
     for baseEnt in names:
       inc(nameNumber, 1)
-      baseEntity(baseEnt, root, outputDir, nameCount, nameNumber)
+      baseEntity(baseEnt, root, outputDir)
   
   if templateGen == "basic_block":
     for blocks in names:
       inc(nameNumber, 1)
-      basicBlock(blocks, root, outputDir, nameCount, nameNumber)
+      basicBlock(blocks, root, outputDir)
 
   if templateGen == "crafting_block":
     for craft in names:
       inc(nameNumber, 1)
-      craftingBlock(craft, root, outputDir, nameCount, nameNumber)
+      craftingBlock(craft, root, outputDir)
 
   if templateGen == "light_block":
     for lights in names:
       inc(nameNumber, 1)
-      lightBlock(lights, root, outputDir, nameCount, nameNumber)
+      lightBlock(lights, root, outputDir)
 
   if templateGen == "place_code_block":
     for place in names:
       inc(nameNumber, 1)
-      placeCodeBlock(place, root, outputDir, nameCount, nameNumber)
+      placeCodeBlock(place, root, outputDir)
 
   if templateGen == "player_code_block":
     for player in names:
       inc(nameNumber, 1)
-      playerCodeBlock(player, root, outputDir, nameCount, nameNumber)
+      playerCodeBlock(player, root, outputDir)
 
   if templateGen == "slab_block":
     for slabs in names:
       inc(nameNumber, 1)
-      slabBlock(slabs, root, outputDir, nameCount, nameNumber)
+      slabBlock(slabs, root, outputDir)
 
   if templateGen == "skull_block":
     for skulls in names:
       inc(nameNumber, 1)
-      skullBlock(skulls, root, outputDir, nameCount, nameNumber)
+      skullBlock(skulls, root, outputDir)
   
   if templateGen == "old_item":
     for items in names:
       inc(nameNumber, 1)
-      oldItem(items, root, outputDir, nameCount, nameNumber)
+      oldItem(items, root, outputDir)
 
   if templateGen == "func_item":
     for funcItem in names:
       inc(nameNumber, 1)
-      funcItem(funcItem, root, outputDir, nameCount, nameNumber)
+      funcItem(funcItem, root, outputDir)
 
   if templateGen == "stair_block":
     for stairs in names:
       inc(nameNumber, 1)
-      stairBlock(stairs, root, outputDir, nameCount, nameNumber)
+      stairBlock(stairs, root, outputDir)
 
   #special templates
   if templateGen == "new_item":
     for itemN in names:
       inc(nameNumber, 1)
-      newItem(itemN, root, outputDir, nameCount, nameNumber, names[0], names[1])
+      newItem(itemN, root, outputDir, nameNumber, names[0], names[1])
   
   #dynamic templates
 
@@ -108,22 +108,22 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
         os.setCurrentDir(outputDir)
         for i in names:
           inc(nameNumber, 1)
-          tempBlockGeo(i, root, outputDir, nameCount, nameNumber, templateGen)
+          tempBlockGeo(i, root, outputDir, templateGen)
       else:
         os.setCurrentDir(outputDir)
         for i in names:
           inc(nameNumber, 1)
-          tempBlock(i, root, outputDir, nameCount, nameNumber, templateGen)
+          tempBlock(i, root, outputDir, templateGen)
     elif fileExists(fmt"./User_templates/Entities/entity/BP/{templateGen}.txt"):
       os.setCurrentDir(outputDir)
       for i in names:
         inc(nameNumber, 1)
-        tempEntity(i, root, outputDir, nameCount, nameNumber, templateGen)
+        tempEntity(i, root, outputDir, templateGen)
     elif fileExists(fmt"./User_templates/Items/items/BP/{templateGen}.txt"):
       os.setCurrentDir(outputDir)
       for i in names:
         inc(nameNumber, 1)
-        tempItem(i, root, outputDir, nameCount, nameNumber, templateGen)
+        tempItem(i, root, outputDir, templateGen)
         
   os.setCurrentDir(root)
   manifest(outputDir, root)

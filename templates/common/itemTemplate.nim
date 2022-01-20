@@ -5,7 +5,7 @@ import nameReplace
 import textureJson
 import langFiles
 
-proc itemTemplate*(name: string, root: string, works: string, nameCount: int, nameNumber: int,
+proc itemTemplate*(name: string, root: string, works: string,
  mainJson: string, resourceJson: string, itemTexture: string)=
     #setup BP folders
     folderExist("BP")
@@ -39,7 +39,7 @@ proc itemTemplate*(name: string, root: string, works: string, nameCount: int, na
     echo name, " generated item texture as ", name, ".png"
 
     #generate texture json
-    textureJson(works, name, nameNumber, nameCount, "item")
+    textureJson(works, name, "item")
     echo name, " generated texture json entry for ", name
 
     #generate lang files

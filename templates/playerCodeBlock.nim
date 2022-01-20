@@ -1,6 +1,6 @@
 import common/blockTemplate
 
-proc playerCodeBlock*(name: string, root: string, works: string, nameCount: int, nameNumber: int)=
+proc playerCodeBlock*(name: string, root: string, works: string)=
     var mainJson = "./templates/playerCodeBlock/BP/playerCodeBlock.txt"
-    blockTemplate(name, root, works, nameCount, nameNumber, mainJson, "stone", "stone", true)
+    blockTemplate(name, root, works, mainJson, "stone", true)
     return
