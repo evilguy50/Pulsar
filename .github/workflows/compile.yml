@@ -13,11 +13,6 @@ jobs:
         version:
           - stable
           - devel
-          - 1.4.0
-          - 1.2.8
-          - 1.0.10
-          - git:bbe49a14ae827b6474d692042406716a3b3dd71f
-          - binary:1.6.0
         os:
           - ubuntu-latest
           - macOS-latest
