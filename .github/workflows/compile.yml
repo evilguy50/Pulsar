@@ -26,5 +26,5 @@ jobs:
       continue-on-error: true
       run: |
         nimble install -y
-        nim c evils_addon_cli.nim
-        nim --app:gui c -d:release --gc:orc -d:useMalloc .\evils_addon_gui.nim
+        nim c ./evils_addon_cli.nim
+        nim --app:gui c -d:release --gc:orc -d:useMalloc ./evils_addon_gui.nim
