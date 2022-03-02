@@ -1,0 +1,35 @@
+name: compile-generator
+on:
+  pull_request:
+  push:
+
+jobs:
+  compile:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version:
+          - stable
+          - devel
+          - 1.4.0
+          - 1.2.8
+          - 1.0.10
+          - git:bbe49a14ae827b6474d692042406716a3b3dd71f
+          - binary:1.6.0
+        os:
+          - ubuntu-latest
+          - macOS-latest
+          - windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: iffy/install-nim@v4.1.1
+      with:
+        version: ${{ matrix.version }}
+    - name: addon-generator
+      continue-on-error: true
+      run: |
+        nimble install -y
+        nim c evils_addon_cli.nim
+        nim --app:gui c -d:release --gc:orc -d:useMalloc .\evils_addon_gui.nim
