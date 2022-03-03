@@ -20,6 +20,7 @@ jobs:
           - windows-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: RpxdYTX/install-glfw-deps@v2
     - uses: iffy/install-nim@v4.1.1
       with:
         version: ${{ matrix.version }}
@@ -31,7 +32,7 @@ jobs:
         nim --app:gui c -d:release --gc:orc ./evils_addon_gui.nim
     - uses: actions/upload-artifact@v2
       with:
-        name: artifacts
+        name: 'artifact_${{ matrix.os }}'
         path: |
           ./
           *.nim
