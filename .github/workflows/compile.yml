@@ -1,8 +1,6 @@
 name: compile-generator
 on:
-  pull_request:
   workflow_dispatch:
-  push:
 
 jobs:
   compile:
