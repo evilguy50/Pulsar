@@ -1,0 +1,37 @@
+name: compile-generator
+on:
+  workflow_dispatch:
+
+jobs:
+  compile:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version:
+          - stable
+          - devel
+        os:
+          - ubuntu-latest
+          - macOS-latest
+          - windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: RpxdYTX/install-glfw-deps@v2
+    - uses: iffy/install-nim@v4.1.1
+      with:
+        version: ${{ matrix.version }}
+    - name: addon-generator
+      continue-on-error: true
+      run: |
+        nimble install -y
+        nim c ./evils_addon_cli.nim
+        nim --app:gui c -d:release --gc:orc ./evils_addon_gui.nim
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'artifact_${{ matrix.os }}'
+        path: |
+          ./
+          *.nim
+          !**/*.nim
