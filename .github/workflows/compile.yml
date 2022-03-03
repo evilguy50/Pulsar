@@ -28,12 +28,11 @@ jobs:
       run: |
         nimble install -y
         nim c ./evils_addon_cli.nim
-        nim --app:gui c -d:release --gc:orc -d:useMalloc ./evils_addon_gui.nim
-    - name: artifacts
-      continue-on-error: true
-      uses: actions/upload-artifact@v2
+        nim --app:gui c -d:release --gc:orc ./evils_addon_gui.nim
+    - uses: actions/upload-artifact@v2
       with:
         name: artifacts
         path: |
           ./
-          !*.nim
+          *.nim
+          !**/*.nim
