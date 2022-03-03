@@ -23,6 +23,9 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: artifacts
+        path: |
+          !**/*.nim
+          **/*
     - uses: iffy/install-nim@v4.1.1
       with:
         version: ${{ matrix.version }}
