@@ -17,7 +17,7 @@ nim dependencies:
 	
 usage:
 	
-	windows: .\evils_addon_gui.exe -o outputdirname -t templatename names
+	windows: .\pulsar.exe -o outputdirname -t templatename names
 	
 Open source licenses used:
 

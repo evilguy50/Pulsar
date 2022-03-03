@@ -1,15 +1,22 @@
 {
     "format_version": 2,
     "header": {
-        "description": "Generated with evil's pack generator",
+        "description": "Generated with Pulsar",
         "name": "$works",
         "uuid": "$uuid1",
         "version": [0, 0, 1],
         "min_engine_version": [ 1, 16, 200 ]
     },
+    "metadata": {
+        "generated_with": {
+            "Pulsar": [
+                "2.2.0"
+            ]
+        }
+    },
     "modules": [
         {
-            "description": "Generated with evil's pack generator",
+            "description": "Generated with Pulsar",
             "type": "resources",
             "uuid": "$uuid2",
             "version": [0, 0, 1]

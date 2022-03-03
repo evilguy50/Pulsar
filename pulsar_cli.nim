@@ -130,7 +130,7 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
   packIcon(outputDir)
 
 proc cli(args: seq[string]) =
-  var opts = newParser("evil's addon generator"):
+  var opts = newParser("Pulsar"):
     nohelpflag()
     #im using my own help flag.
     option("-t", "--templateGen")
@@ -140,9 +140,9 @@ proc cli(args: seq[string]) =
     arg("names", nargs = -1)
   var optGen = opts.parse(args)
   if optGen.help:
-    echo "evil's Addon Generator: Help Section.\n\n"
+    echo "Pulsar: Help Section.\n\n"
     echo "How to run: \n"
-    echo ".\\evils_addon_cli.exe -o (name of output folder) -t (template to use) (list of names)\n"
+    echo ".\\pulsar_cli.exe -o (name of output folder) -t (template to use) (list of names)\n"
     quit("run it with -l to list all templates", 0)
   if optGen.list:
     var templateInfo = readFile("./template_info.txt")

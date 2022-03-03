@@ -43,7 +43,7 @@ proc itemTemplate*(name: string, root: string, works: string,
     echo name, " generated texture json entry for ", name
 
     #generate lang files
-    var itemEntry = fmt"item.evil:{name}.name={name}"
+    var itemEntry = fmt"item.pulsar:{name}.name={name}"
     bpLang(works, name)
     rpLang(works, name, itemEntry)
     echo name, " generated item lang entry for ", name

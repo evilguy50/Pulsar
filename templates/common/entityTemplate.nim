@@ -73,7 +73,7 @@ proc entityTemplate*(name: string, root: string, works: string, model: string, r
     echo (name, "generated entity as ", name, ".png")
 
   #generate spawnegg texture
-  var spawneggFileName = "./templates/common/RP/textures/evil.png"
+  var spawneggFileName = "./templates/common/RP/textures/placeholder.png"
   var spawneggString = fmt"./{works}/RP/textures/items/egg/{name}.png"
   copyFile(spawneggFileName, spawneggString)
   echo (name, " saved spawnegg as ", name, ".png")
@@ -82,12 +82,12 @@ proc entityTemplate*(name: string, root: string, works: string, model: string, r
   bpLang(works, name)
 
   #generate RP lang files
-  var entityEntry = fmt"entity.evil:{name}.name={name}"
+  var entityEntry = fmt"entity.pulsar:{name}.name={name}"
   rpLang(works, name, entityEntry)
   echo ("added language entry for entity ", name)
 
   #populate spawnegg entries
-  var spawneggEntry = fmt"item.spawn_egg.entity.evil:{name}.name={name}"
+  var spawneggEntry = fmt"item.spawn_egg.entity.pulsar:{name}.name={name}"
   rpLang(works, name, spawneggEntry)
   echo ("added language entry for spawnegg ", name)
 

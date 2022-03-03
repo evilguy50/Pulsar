@@ -2,9 +2,9 @@
   "format_version": "1.16.100",
   "minecraft:block": {
     "description": {
-      "identifier": "evil:$name",
+      "identifier": "pulsar:$name",
       "properties": {
-        "evil:stair_rotation": [
+        "pulsar:stair_rotation": [
           1,
           2,
           3,
@@ -55,13 +55,13 @@
     "events": {
       "set_placing_rotation": {
         "set_block_property": {
-          "evil:stair_rotation": "query.cardinal_facing_2d-1"
+          "pulsar:stair_rotation": "query.cardinal_facing_2d-1"
         }
       }
     },
     "permutations": [
       {
-        "condition": "query.block_property('evil:stair_rotation') == 1",
+        "condition": "query.block_property('pulsar:stair_rotation') == 1",
         "components": {
           "minecraft:rotation": [
             0,
@@ -71,7 +71,7 @@
         }
       },
       {
-        "condition": "query.block_property('evil:stair_rotation') == 2",
+        "condition": "query.block_property('pulsar:stair_rotation') == 2",
         "components": {
           "minecraft:rotation": [
             0,
@@ -81,7 +81,7 @@
         }
       },
       {
-        "condition": "query.block_property('evil:stair_rotation') == 3",
+        "condition": "query.block_property('pulsar:stair_rotation') == 3",
         "components": {
           "minecraft:rotation": [
             0,
@@ -91,7 +91,7 @@
         }
       },
       {
-        "condition": "query.block_property('evil:stair_rotation') == 4",
+        "condition": "query.block_property('pulsar:stair_rotation') == 4",
         "components": {
           "minecraft:rotation": [
             0,

@@ -1,2 +1,2 @@
 pack.name=$works behavior pack
-pack.description= generated with evil's addon generator
+pack.description= generated with Pulsar

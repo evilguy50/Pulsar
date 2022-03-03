@@ -7,7 +7,7 @@ proc newItem*(name: string, root: string, works: string, nameNumber: int, cat: s
     var group2 = group
     var mainJson = "./templates/newItem/BP/newItem.txt"
     var resourceJson = "./templates/newItem/RP/newItem.txt"
-    var itemTexture = "./templates/common/RP/textures/evil.png"
+    var itemTexture = "./templates/common/RP/textures/placeholder.png"
     var itemJson = fmt"./BP/items/{name}.json"
     var rpitemJson = fmt"./RP/items/{name}.json"
     var langJson = "./RP/texts/en_US.lang"
@@ -33,6 +33,6 @@ proc newItem*(name: string, root: string, works: string, nameNumber: int, cat: s
         writeFile(rpitemJson, rpitemReplace)
 
         var langRead = readFile(langJson)
-        var langReplace = replace(langRead, fmt"item.evil:{name}.name={name}", fmt"item.evil:{name}={name}")
+        var langReplace = replace(langRead, fmt"item.pulsar:{name}.name={name}", fmt"item.pulsar:{name}={name}")
         writeFile(langJson, langReplace)
     return

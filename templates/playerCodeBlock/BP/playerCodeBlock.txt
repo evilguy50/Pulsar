@@ -2,7 +2,7 @@
   "format_version": "1.16.100",
   "minecraft:block": {
     "description": {
-      "identifier": "evil:$name"
+      "identifier": "pulsar:$name"
     },
     "components": {
       "minecraft:loot": "loot_tables/blocks/$name.json",

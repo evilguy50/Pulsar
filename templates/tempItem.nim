@@ -10,12 +10,12 @@ proc tempItem*(name: string, root: string, works: string, baseName: string)=
     var textureCheck = fmt"./User_templates/Items/texture/{baseName}.png"
     var itemTexture = textureCheck
     if os.fileExists(textureCheck) == false:
-        itemTexture = "./templates/common/RP/textures/evil.png"
+        itemTexture = "./templates/common/RP/textures/placeholder.png"
     os.setCurrentDir(works)
     itemTemplate(name, root, works, mainJson, resourceJson, itemTexture)
 
     var langJson = "./RP/texts/en_US.lang"
     var langRead = readFile(langJson)
-    var langReplace = replace(langRead, fmt"item.evil:{name}.name={name}", fmt"item.evil:{name}={name}")
+    var langReplace = replace(langRead, fmt"item.pulsar:{name}.name={name}", fmt"item.pulsar:{name}={name}")
     writeFile(langJson, langReplace)
     return

@@ -1,5 +1,5 @@
 import nimraylib_now
-import evils_addon_cli
+import pulsar_cli
 import strutils
 import os
 
@@ -10,10 +10,9 @@ import "Assets/Settings/tempBox.nim"
 import "Assets/Settings/projectBox.nim"
 import "Assets/Settings/devBox.nim"
 
-import "Assets/Settings/evilHead.nim"
-import "Assets/Settings/RaverLogo.nim"
+import "Assets/Settings/discordLogo.nim"
 
-import "Assets/Settings/evilLogo.nim"
+import "Assets/Settings/logo.nim"
 
 #background settings
 var
@@ -25,27 +24,24 @@ var
 var frameCount = 0
 var fontSize: cint = 13
 
-initWindow(back_width, back_height , "evil's addon generator")
-var evil_img: Image = loadImage("./Assets/Images/evil-head.png")
-var evil_head_small: Image = loadImage("./Assets/Images/evil-head_small.png")
-var raver_img: Image = loadImage("./Assets/Images/raver_logo.png")
-setWindowIcon(evil_img)
+initWindow(back_width, back_height , "Pulsar")
+var pulsarIcon: Image = loadImage("./Assets/Images/pulsar_icon.png")
+var discord_img: Image = loadImage("./Assets/Images/discord_logo.png")
+setWindowIcon(pulsarIcon)
 setTargetFPS(30)
 var background: Image = loadImage("./Assets/Images/background.png")
 var back_ptr: ptr Image = addr(background)
-var logo_img: Image = loadImage("./Assets/Images/evil_logo.png")
+var logo_img: Image = loadImage("./Assets/Images/logo.png")
 imageFlipHorizontal(back_ptr)
 var render_background = loadTextureFromImage(background)
 drawTexture(render_background, back_xpos, back_ypos, White)
-var render_evil = loadTextureFromImage(evil_head_small)
-drawTexture(render_evil, evil_xpos, evil_ypos, White)
 var render_logo: Texture = loadTextureFromImage(logo_img)
-var render_raver: Texture = loadTextureFromImage(raver_img)
+var render_discord: Texture = loadTextureFromImage(discord_img)
 drawTexture(render_logo, logo_xpos, logo_ypos, White)
-drawTexture(render_raver, raver_xpos, raver_ypos, White)
+drawTexture(render_discord, discord_xpos, discord_ypos, White)
 unloadImage(background)
-unloadImage(evil_head_small)
-unloadImage(raver_img)
+unloadImage(pulsarIcon)
+unloadImage(discord_img)
 
 unloadImage(logo_img)
 
@@ -67,21 +63,13 @@ while not windowShouldClose():
     else:
         frameCount = 0
 
-    #evil head
-    var discord: Rectangle = (x:evilF_xpos, y:evilF_ypos, width:100.0, height:100.0)
+    #discord discord
+    var discord: Rectangle = (x:discordF_xpos, y:discordF_ypos, width:100.0, height:100.0)
     var discord_mouse: bool = checkCollisionPointRec(getMousePosition(), discord)
-    var discord_button = imageButton(discord, "My discord", render_evil)
+    var discord_button = imageButton(discord, "Partner Links", render_discord)
     if discord_mouse:
         if discord_button:
-            openURL("https://discord.gg/JTgAV9Fh8W")
-
-    #raver discord
-    var rvdiscord: Rectangle = (x:raverF_xpos, y:raverF_ypos, width:100.0, height:100.0)
-    var rvdiscord_mouse: bool = checkCollisionPointRec(getMousePosition(), rvdiscord)
-    var rvdiscord_button = imageButton(rvdiscord, "Partner Discord", render_raver)
-    if rvdiscord_mouse:
-        if rvdiscord_button:
-            openURL("http://discord.raverx.network")
+            openURL("http://discord.discordx.network")
 
     #project box logic
     var projBox: Rectangle = (x:projF_xpos, y:projF_ypos, width:projF_width, height:projF_height)
@@ -113,20 +101,13 @@ while not windowShouldClose():
     beginDrawing()
     #render background image
     drawTexture(render_background, back_xpos, back_ypos, White)
-
-    #render evil Discord
-    drawTexture(render_evil, evil_xpos, evil_ypos, White)
-    if discord_mouse:
-        drawRectangle(discord_xpos, discord_ypos, discord_width, discord_height, White)
-        drawRectangleLines(discord_xpos, discord_ypos, discord_width, discord_height, Black)
-        drawText("My discord", discordTXT_xpos, discordTXT_ypos, fontSize, Black)
     
-    #render raver discord
-    drawTexture(render_raver, raver_xpos, raver_ypos, White)
-    if rvdiscord_mouse:
-        drawRectangle(raverBox_xpos, raverBox_ypos, raverBox_width, raverBox_height, White)
-        drawRectangleLines(raverBox_xpos, raverBox_ypos, raverBox_width, raverBox_height, Black)
-        drawText("partner discord", raverTXT_xpos, raverTXT_ypos, fontSize, Black)
+    #render discord discord
+    drawTexture(render_discord, discord_xpos, discord_ypos, White)
+    if discord_mouse:
+        drawRectangle(discordBox_xpos, discordBox_ypos, discordBox_width, discordBox_height, White)
+        drawRectangleLines(discordBox_xpos, discordBox_ypos, discordBox_width, discordBox_height, Black)
+        drawText("partner discord", discordTXT_xpos, discordTXT_ypos, fontSize, Black)
 
     #evil logo
     drawTexture(render_logo, logo_xpos, logo_ypos, White)
@@ -167,7 +148,7 @@ while not windowShouldClose():
         for i in templateList:
             foo = foo + 15
             var bar = foo
-            drawText(i, listTXT_xpos, bar, fontSize, Black)
+            drawText(i.cstring, listTXT_xpos, bar, fontSize, Black)
 
     if showUsrList:
         drawRectangle(tempL_xpos + 710, tempL_ypos, tempL_width, tempL_height, White)
@@ -179,7 +160,7 @@ while not windowShouldClose():
         os.setCurrentDir("blocks")
         for i in os.walkFiles("*.txt"):
             var user_tmpNameSTR = split(i, ".", 2)
-            var user_tmpName: cstring = user_tmpNameSTR[0]
+            var user_tmpName: cstring = user_tmpNameSTR[0].cstring
             ufoo = ufoo + 15
             var ubar = ufoo
             drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
@@ -190,7 +171,7 @@ while not windowShouldClose():
         os.setCurrentDir("BP")
         for i in os.walkFiles("*.txt"):
             var user_tmpNameSTR = split(i, ".", 2)
-            var user_tmpName: cstring = user_tmpNameSTR[0]
+            var user_tmpName: cstring = user_tmpNameSTR[0].cstring
             ufoo = ufoo + 15
             var ubar = ufoo
             drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
@@ -201,7 +182,7 @@ while not windowShouldClose():
         os.setCurrentDir("BP")
         for i in os.walkFiles("*.txt"):
             var user_tmpNameSTR = split(i, ".", 2)
-            var user_tmpName: cstring = user_tmpNameSTR[0]
+            var user_tmpName: cstring = user_tmpNameSTR[0].cstring
             ufoo = ufoo + 15
             var ubar = ufoo
             drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
@@ -241,7 +222,6 @@ while not windowShouldClose():
 
     endDrawing()
 unloadTexture(render_background)
-unloadTexture(render_evil)
-unloadTexture(render_raver)
+unloadTexture(render_discord)
 unloadTexture(render_logo)
 closeWindow()

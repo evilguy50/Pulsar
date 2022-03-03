@@ -2,7 +2,7 @@
 	"format_version": "1.10",
 	"minecraft:item": {
 		"description": {
-			"identifier": "evil:$name"
+			"identifier": "pulsar:$name"
 		},
 		"components": {
 			"minecraft:hand_equipped": false,

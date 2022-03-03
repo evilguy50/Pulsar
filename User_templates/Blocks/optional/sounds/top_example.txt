@@ -4,4 +4,4 @@
         1,
         0
     ],
-    "evil:$name": {"textures": "$name", "sound": "stone"}
+    "pulsar:$name": {"textures": "$name", "sound": "stone"}

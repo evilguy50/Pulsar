@@ -50,12 +50,12 @@ proc blockTemplate*(name: string, root: string, works: string,
     echo name, " generated texture entry for ", name
 
     #generate language files
-    var rpLang_entry = fmt"tile.evil:{name}.name={name}"
+    var rpLang_entry = fmt"tile.pulsar:{name}.name={name}"
     bpLang(works, name)
     rpLang(works, name, rpLang_entry)
     echo name, " generated lang entries for ", name
 
-    var blockTextureFile = "./templates/common/RP/textures/evil.png"
+    var blockTextureFile = "./templates/common/RP/textures/placeholder.png"
     var blockTextureString = fmt"./{works}/RP/textures/blocks/{name}.png"
     copyFile(blockTextureFile, blockTextureString)
     echo name, " generated texture as ", name, ".json"
@@ -66,8 +66,6 @@ proc blockTemplate*(name: string, root: string, works: string,
 proc blockTemplate*(name: string, root: string, works: string,
  mainJson: string, soundJson: string, geometry: string, geometryTexture: string, function: bool)=
     var geometryTexture2 = geometryTexture
-    if geometryTexture == "evil":
-       geometryTexture2 = "./templates/common/RP/textures/evil.png"
 
     #create BP folders
     folderExist("BP")
@@ -112,7 +110,7 @@ proc blockTemplate*(name: string, root: string, works: string,
     echo name, " generated texture entry for ", name
 
     #generate language files
-    var rpLang_entry = fmt"tile.evil:{name}.name={name}"
+    var rpLang_entry = fmt"tile.pulsar:{name}.name={name}"
     bpLang(works, name)
     rpLang(works, name, rpLang_entry)
     echo name, " generated lang entries for ", name

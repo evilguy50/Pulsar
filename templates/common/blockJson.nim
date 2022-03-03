@@ -13,9 +13,9 @@ proc blockJson*(works: string, name: string, sound: string)=
     else:
         rpJson = rpBlockName.readFile().parseJson()
 
-    rpJson.add("evil:" & name, newJObject())
-    rpJson["evil:" & name].add("textures", newJString(name))
-    rpJson["evil:" & name].add("sound", newJString(sound))
+    rpJson.add("pulsar:" & name, newJObject())
+    rpJson["pulsar:" & name].add("textures", newJString(name))
+    rpJson["pulsar:" & name].add("sound", newJString(sound))
     writeFile(rpBlockName, rpJson.pretty())
     echo name, " generated block jsonn definition for ", name
 

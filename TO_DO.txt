@@ -19,6 +19,11 @@ entities
 
 
 TO DO
+
+redo README.md
+better description
+fix discord button
+
 blocks
 	tick toggle block
 	tick stand block
