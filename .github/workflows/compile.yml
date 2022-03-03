@@ -20,12 +20,6 @@ jobs:
           - windows-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/upload-artifact@v2
-      with:
-        name: artifacts
-        path: |
-          !**/*.nim
-          **/*
     - uses: iffy/install-nim@v4.1.1
       with:
         version: ${{ matrix.version }}
@@ -35,3 +29,11 @@ jobs:
         nimble install -y
         nim c ./evils_addon_cli.nim
         nim --app:gui c -d:release --gc:orc -d:useMalloc ./evils_addon_gui.nim
+    - name: artifacts
+      continue-on-error: true
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
+        path: |
+          ./
+          !*.nim
