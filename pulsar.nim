@@ -49,6 +49,7 @@ var showTempList: bool
 var showUsrList: bool
 var paused: bool
 var clearBox: bool
+var showLinks: bool
 if showTempList:
     drawRectangle(tempL_xpos, tempL_ypos, tempL_width, tempL_height, White)
     drawRectangleLines(tempL_xpos, tempL_ypos, tempL_width, tempL_height, Black)
@@ -67,9 +68,15 @@ while not windowShouldClose():
     var discord: Rectangle = (x:discordF_xpos, y:discordF_ypos, width:100.0, height:100.0)
     var discord_mouse: bool = checkCollisionPointRec(getMousePosition(), discord)
     var discord_button = imageButton(discord, "Partner Links", render_discord)
+    var boxSize: (float, float) = (discordBox_width.toFloat(), 30.00)
+    var evilRec: Rectangle= (x:discordF_xpos - 10, y:discordF_ypos - 30, width:boxSize[0], height:boxSize[1])
+    var raverRec: Rectangle =(x:discordF_xpos - 10, y:discordF_ypos - 65, width:boxSize[0], height:boxSize[1])
     if discord_mouse:
         if discord_button:
-            openURL("http://discord.discordx.network")
+            if showLinks:
+                showLinks = false
+            else:
+                showLinks = true
 
     #project box logic
     var projBox: Rectangle = (x:projF_xpos, y:projF_ypos, width:projF_width, height:projF_height)
@@ -104,10 +111,13 @@ while not windowShouldClose():
     
     #render discord discord
     drawTexture(render_discord, discord_xpos, discord_ypos, White)
-    if discord_mouse:
-        drawRectangle(discordBox_xpos, discordBox_ypos, discordBox_width, discordBox_height, White)
-        drawRectangleLines(discordBox_xpos, discordBox_ypos, discordBox_width, discordBox_height, Black)
-        drawText("partner discord", discordTXT_xpos, discordTXT_ypos, fontSize, Black)
+    if showLinks:
+        var evilButton = button(evilRec, "evil's Marketplace")
+        if evilButton:
+            openURL("https://discord.gg/JTgAV9Fh8W")
+        var raverButton = button(raverRec, "RaverXNetwork")
+        if raverButton:
+            openURL("http://discord.raverx.network")
 
     #evil logo
     drawTexture(render_logo, logo_xpos, logo_ypos, White)
