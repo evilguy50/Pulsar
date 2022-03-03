@@ -1,6 +1,7 @@
 name: compile-generator
 on:
   pull_request:
+  workflow_dispatch:
   push:
 
 jobs:
@@ -19,6 +20,9 @@ jobs:
           - windows-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
     - uses: iffy/install-nim@v4.1.1
       with:
         version: ${{ matrix.version }}
