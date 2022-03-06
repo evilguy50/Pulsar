@@ -1,4 +1,4 @@
-# addon-generator
+# Pulsar
 Template based add-on generator for minecraft bedrock edition written in nim.
 	
 How to compile:
