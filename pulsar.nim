@@ -1,5 +1,6 @@
 import nimraylib_now
 import pulsar_cli
+import nimclipboard/libclipboard
 import strutils
 import os
 
@@ -48,6 +49,7 @@ unloadImage(logo_img)
 var showTempList: bool
 var showUsrList: bool
 var paused: bool
+var inCLip: bool
 var clearBox: bool
 var showLinks: bool
 if showTempList:
@@ -59,6 +61,8 @@ if showUsrList:
     drawRectangleLines(tempL_xpos + 710, tempL_ypos, tempL_width, tempL_height, Black)
 
 while not windowShouldClose():
+    var cb = clipboard_new(nil)
+    var cbData = $cb.clipboard_text()
     if frameCount <= 30:
         inc(frameCount, 1)
     else:
@@ -82,13 +86,13 @@ while not windowShouldClose():
     var projBox: Rectangle = (x:projF_xpos, y:projF_ypos, width:projF_width, height:projF_height)
     var projBoxW: Rectangle = (x:projF_xpos + 5, y:projF_ypos + 5, width:projF_width - 5, height:projF_height - 5)
     var proj_mouse: bool = checkCollisionPointRec(getMousePosition(), projBox)
-    inputKeys(proj_mouse, proj_key, proj_keyMax, proj_letters, proj_chars, frameCount)
+    inputKeys(proj_mouse, proj_key, proj_keyMax, proj_letters, proj_chars, frameCount, cbData, inCLip)
 
     #template box logic
     var tempBox: Rectangle = (x:tempF_xpos, y:tempF_ypos, width:tempF_width, height:tempF_height)
     var tempBoxW: Rectangle = (x:tempF_xpos + 5, y:tempF_ypos + 5, width:tempF_width - 5, height:tempF_height - 5)
     var temp_mouse: bool = checkCollisionPointRec(getMousePosition(), tempBox)
-    inputKeys(temp_mouse, temp_key, temp_keyMax, temp_letters, temp_chars, frameCount)
+    inputKeys(temp_mouse, temp_key, temp_keyMax, temp_letters, temp_chars, frameCount, cbData, inCLip)
 
     var temp_button: Rectangle = (x:tempB_xpos, y:tempB_ypos, width:tempB_width, height:tempB_height)
     var list_mouse: bool = checkCollisionPointRec(getMousePosition(), temp_button)
@@ -100,7 +104,7 @@ while not windowShouldClose():
     var nameBox: Rectangle = (x: nameF_xpos, y: nameF_ypos, width: nameF_width, height: nameF_height)
     var nameBoxW: Rectangle = (x: nameF_xpos + 5, y: nameF_ypos + 5, width: nameF_width - 5, height: nameF_height - 5)
     var name_mouse: bool = checkCollisionPointRec(getMousePosition(), nameBox)
-    inputKeys(name_mouse, name_key, name_keyMax, name_letters, name_chars, frameCount)
+    inputKeys(name_mouse, name_key, name_keyMax, name_letters, name_chars, frameCount, cbData, inCLip)
 
     #Generate button
     var genBox: Rectangle = (x:devF_xpos, y:devF_ypos, width:devF_width, height:devF_height)

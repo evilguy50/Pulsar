@@ -4,5 +4,6 @@ description   = "Addon generator for Minecraft bedrock edition"
 license       = "GPL 3.0"
 
 requires "nimraylib_now == 0.13.2"
+requires "nimclipboard >= 0.1.2"
 requires "argparse"
 requires "uuids"
