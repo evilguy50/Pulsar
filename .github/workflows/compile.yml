@@ -11,7 +11,6 @@ jobs:
       matrix:
         version:
           - stable
-          - devel
         os:
           - ubuntu-latest
           - macOS-latest
@@ -26,8 +25,8 @@ jobs:
       continue-on-error: true
       run: |
         nimble install -y
-        nim c ./evils_addon_cli.nim
-        nim --app:gui c -d:release --gc:orc ./evils_addon_gui.nim
+        nim c ./pulsar_cli.nim
+        nim --app:gui c -d:release --gc:orc ./pulsar.nim
     - uses: actions/upload-artifact@v2
       with:
         name: 'artifact_${{ matrix.os }}'
