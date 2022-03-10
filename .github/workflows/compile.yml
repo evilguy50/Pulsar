@@ -38,7 +38,7 @@ jobs:
     - name: mac_gui
       if: matrix.os == 'macOS-latest'
       run: |
-        nim --app:gui --out:pulsar.app objc -d:release --gc:orc ./pulsar.nim
+        nim --app:gui --out:pulsar.app c -d:release --gc:orc ./pulsar.nim
         chmod +x ./pulsar
     - uses: actions/upload-artifact@v2
       with:
