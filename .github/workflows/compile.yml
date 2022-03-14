@@ -41,6 +41,16 @@ jobs:
         nim --app:gui --out:pulsar.app c -d:release --gc:orc ./pulsar.nim
         chmod +x ./pulsar.app
     - uses: actions/upload-artifact@v2
+      if: matrix.os == 'windows-latest'
+      with:
+        name: 'artifact_${{ matrix.os }}'
+        path: |
+          ./
+          *.nim
+          !**/*.nim
+    - name: Upload Tar Artifact
+      uses: alehechka/upload-tartifact@v1
+      if: matrix.os != 'windows-latest'
       with:
         name: 'artifact_${{ matrix.os }}'
         path: |
