@@ -11,6 +11,7 @@ import templateList
 import zippy/ziparchives
 import "Assets/Settings/tempBox.nim"
 import "templates/common/blockTemplate.nim"
+import "templates/common/itemTemplate.nim"
 
 proc eRead(z: string, path: string): string=
   var reader = openZipArchive(z)
@@ -117,7 +118,7 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
       for i in names:
         inc(nameNumber, 1)
         tempEntity(i, root, outputDir, templateGen)
-    elif fileExists(fmt"./User_templates/custom/Items/items/BP/{templateGen}.json"):
+    elif fileExists(fmt"./User_templates/custom/Items/items/{templateGen}.json"):
       os.setCurrentDir(outputDir)
       for i in names:
         inc(nameNumber, 1)
@@ -151,6 +152,15 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
           else:
             for pblock in names:
               pulsarBlock(pblock, root, outputDir, mainBlock, mainSound, mainGeo, mainImg, false)
+        of "item":
+          var mainItem = readZip.eRead(fmt"Items/items/{templateGen}.json")
+          var rItem = readZip.eRead(fmt"Items/optional/RP/{templateGen}.json")
+          var itemTexture = readZip.eRead(fmt"Items/optional/texture/{templateGen}.png")
+          if itemTexture == "null":
+            itemTexture = readFile("./templates/common/RP/textures/placeholder.png")
+          for pItem in names:
+            pulsarItem(pItem, root, outputDir, mainItem, rItem, itemTexture)
+          
 
       except:
         invalid = true

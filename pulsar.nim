@@ -196,7 +196,6 @@ while not windowShouldClose():
         os.setCurrentDir("custom")
         os.setCurrentDir("Items")
         os.setCurrentDir("items")
-        os.setCurrentDir("BP")
         for i in os.walkFiles("*.json"):
             var user_tmpNameSTR = split(i, ".", 2)
             var user_tmpName: cstring = user_tmpNameSTR[0].cstring
