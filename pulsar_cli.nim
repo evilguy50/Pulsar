@@ -12,6 +12,7 @@ import zippy/ziparchives
 import "Assets/Settings/tempBox.nim"
 import "templates/common/blockTemplate.nim"
 import "templates/common/itemTemplate.nim"
+import "templates/common/entityTemplate.nim"
 
 proc eRead(z: string, path: string): string=
   var reader = openZipArchive(z)
@@ -133,7 +134,7 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
             tempType = "block"
           elif path.contains("Items/items"):
             tempType = "item"
-          elif path.contains("Entites/entity"):
+          elif path.contains("Entities/entity"):
             tempType = "entity"   
         pZip.close()
         case tempType:
@@ -160,7 +161,16 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
             itemTexture = readFile("./templates/common/RP/textures/placeholder.png")
           for pItem in names:
             pulsarItem(pItem, root, outputDir, mainItem, rItem, itemTexture)
-          
+        of "entity":
+          var eMain = readZip.eRead(fmt"Entities/entity/BP/{templateGen}.json")
+          var eResource = readZip.eRead(fmt"Entities/entity/RP/{templateGen}.json")
+          var eModel = readZip.eRead(fmt"Entities/geometry/{templateGen}.json")
+          var eTexture = readZip.eRead(fmt"Entities/geometry/textures/{templateGen}.png")
+          var eRend = readZip.eRead(fmt"Entities/render/{templateGen}.json")
+          var eloot = readZip.eRead(fmt"Entities/optional/loot/{templateGen}.json")
+          var eTrade = readZip.eRead(fmt"Entities/optional/trades/{templateGen}.json")
+          for pEntity in names:
+            pulsarEntity(pEntity, root, outputDir, eModel, eRend, eTexture, eloot, eMain, eResource, eTrade)
 
       except:
         invalid = true
