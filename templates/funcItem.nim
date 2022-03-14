@@ -4,8 +4,8 @@ import os
 import strformat
 
 proc funcItem*(name: string, root: string, works: string)=
-    var mainJson = "./templates/funcItem/BP/funcItem.txt"
-    var resourceJson = "./templates/oldItem/RP/oldItem.txt"
+    var mainJson = "./templates/funcItem/BP/funcItem.json"
+    var resourceJson = "./templates/oldItem/RP/oldItem.json"
     var itemTexture = "./templates/common/RP/textures/placeholder.png"
     itemTemplate(name, root, works, mainJson, resourceJson, itemTexture)
     os.setCurrentDir("BP")

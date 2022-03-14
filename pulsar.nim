@@ -170,9 +170,10 @@ while not windowShouldClose():
         var ufoo = listTXT_ypos
         var user_root = os.getCurrentDir()
         os.setCurrentDir("User_templates")
+        os.setCurrentDir("custom")
         os.setCurrentDir("Blocks")
         os.setCurrentDir("blocks")
-        for i in os.walkFiles("*.txt"):
+        for i in os.walkFiles("*.json"):
             var user_tmpNameSTR = split(i, ".", 2)
             var user_tmpName: cstring = user_tmpNameSTR[0].cstring
             ufoo = ufoo + 15
@@ -180,10 +181,11 @@ while not windowShouldClose():
             drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
         os.setCurrentDir(user_root)
         os.setCurrentDir("User_templates")
+        os.setCurrentDir("custom")
         os.setCurrentDir("Entities")
         os.setCurrentDir("entity")
         os.setCurrentDir("BP")
-        for i in os.walkFiles("*.txt"):
+        for i in os.walkFiles("*.json"):
             var user_tmpNameSTR = split(i, ".", 2)
             var user_tmpName: cstring = user_tmpNameSTR[0].cstring
             ufoo = ufoo + 15
@@ -191,10 +193,20 @@ while not windowShouldClose():
             drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
         os.setCurrentDir(user_root)
         os.setCurrentDir("User_templates")
+        os.setCurrentDir("custom")
         os.setCurrentDir("Items")
         os.setCurrentDir("items")
         os.setCurrentDir("BP")
-        for i in os.walkFiles("*.txt"):
+        for i in os.walkFiles("*.json"):
+            var user_tmpNameSTR = split(i, ".", 2)
+            var user_tmpName: cstring = user_tmpNameSTR[0].cstring
+            ufoo = ufoo + 15
+            var ubar = ufoo
+            drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
+        os.setCurrentDir(user_root)
+        os.setCurrentDir("User_templates")
+        os.setCurrentDir("imported")
+        for i in os.walkFiles("*.pulsar"):
             var user_tmpNameSTR = split(i, ".", 2)
             var user_tmpName: cstring = user_tmpNameSTR[0].cstring
             ufoo = ufoo + 15

@@ -5,8 +5,8 @@ import strutils
 proc newItem*(name: string, root: string, works: string, nameNumber: int, cat: string, group: string)=
     var cat2 = cat
     var group2 = group
-    var mainJson = "./templates/newItem/BP/newItem.txt"
-    var resourceJson = "./templates/newItem/RP/newItem.txt"
+    var mainJson = "./templates/newItem/BP/newItem.json"
+    var resourceJson = "./templates/newItem/RP/newItem.json"
     var itemTexture = "./templates/common/RP/textures/placeholder.png"
     var itemJson = fmt"./BP/items/{name}.json"
     var rpitemJson = fmt"./RP/items/{name}.json"

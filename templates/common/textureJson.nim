@@ -4,7 +4,7 @@ import strutils
 import json
 
 proc textureJson*(works: string, name: string, templateType: string)=
-    var textures_txt = "./templates/common/RP/item_textures.txt"
+    var textures_txt = "./templates/common/RP/item_textures.json"
     var textures_entry_txt: string
     if templateType == "entity":
         textures_entry_txt = "textures/items/egg/" & name

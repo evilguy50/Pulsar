@@ -1,5 +1,6 @@
 #import dependencies
 import os
+import json
 import argparse
 import manifest
 import outputDir
@@ -7,7 +8,17 @@ import packIcon
 import strutils
 import strformat
 import templateList
+import zippy/ziparchives
 import "Assets/Settings/tempBox.nim"
+import "templates/common/blockTemplate.nim"
+
+proc eRead(z: string, path: string): string=
+  var reader = openZipArchive(z)
+  try:
+    result = reader.extractFile(path)
+  except:
+    result = "null"
+  reader.close()
 
 #define command line options
 proc generate*(outputDir: string, templateGen: string, nameStr: string) =
@@ -30,67 +41,54 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
   #standard templates
   if templateGen == "zombie_entity":
     for zombies in names:
-      inc(nameNumber, 1)
       zombieEntity(zombies, root, outputDir)
 
   if templateGen == "dummy_entity":
     for dummies in names:
-      inc(nameNumber, 1)
       dummyEntity(dummies, root, outputDir)
 
   if templateGen == "base_entity":
     for baseEnt in names:
-      inc(nameNumber, 1)
       baseEntity(baseEnt, root, outputDir)
   
   if templateGen == "basic_block":
     for blocks in names:
-      inc(nameNumber, 1)
       basicBlock(blocks, root, outputDir)
 
   if templateGen == "crafting_block":
     for craft in names:
-      inc(nameNumber, 1)
       craftingBlock(craft, root, outputDir)
 
   if templateGen == "light_block":
     for lights in names:
-      inc(nameNumber, 1)
       lightBlock(lights, root, outputDir)
 
   if templateGen == "place_code_block":
     for place in names:
-      inc(nameNumber, 1)
       placeCodeBlock(place, root, outputDir)
 
   if templateGen == "player_code_block":
     for player in names:
-      inc(nameNumber, 1)
       playerCodeBlock(player, root, outputDir)
 
   if templateGen == "slab_block":
     for slabs in names:
-      inc(nameNumber, 1)
       slabBlock(slabs, root, outputDir)
 
   if templateGen == "skull_block":
     for skulls in names:
-      inc(nameNumber, 1)
       skullBlock(skulls, root, outputDir)
   
   if templateGen == "old_item":
     for items in names:
-      inc(nameNumber, 1)
       oldItem(items, root, outputDir)
 
   if templateGen == "func_item":
     for funcItem in names:
-      inc(nameNumber, 1)
       funcItem(funcItem, root, outputDir)
 
   if templateGen == "stair_block":
     for stairs in names:
-      inc(nameNumber, 1)
       stairBlock(stairs, root, outputDir)
 
   #special templates
@@ -100,11 +98,11 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
       newItem(itemN, root, outputDir, nameNumber, names[0], names[1])
   
   #dynamic templates
-
+  var invalid = false
   if baseTemplate == false:
     os.setCurrentDir(root)
-    if fileExists(fmt"./User_templates/Blocks/blocks/{templateGen}.txt"):
-      if fileExists(fmt"./User_templates/Blocks/optional/geometry/{templateGen}.txt"):
+    if fileExists(fmt"./User_templates/custom/Blocks/blocks/{templateGen}.json"):
+      if fileExists(fmt"./User_templates/custom/Blocks/optional/geometry/{templateGen}.json"):
         os.setCurrentDir(outputDir)
         for i in names:
           inc(nameNumber, 1)
@@ -114,22 +112,59 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
         for i in names:
           inc(nameNumber, 1)
           tempBlock(i, root, outputDir, templateGen)
-    elif fileExists(fmt"./User_templates/Entities/entity/BP/{templateGen}.txt"):
+    elif fileExists(fmt"./User_templates/custom/Entities/entity/BP/{templateGen}.json"):
       os.setCurrentDir(outputDir)
       for i in names:
         inc(nameNumber, 1)
         tempEntity(i, root, outputDir, templateGen)
-    elif fileExists(fmt"./User_templates/Items/items/BP/{templateGen}.txt"):
+    elif fileExists(fmt"./User_templates/custom/Items/items/BP/{templateGen}.json"):
       os.setCurrentDir(outputDir)
       for i in names:
         inc(nameNumber, 1)
         tempItem(i, root, outputDir, templateGen)
-        
-  os.setCurrentDir(root)
-  manifest(outputDir, root)
-  packIcon(outputDir)
+    elif fileExists(fmt"./User_templates/imported/{templateGen}.pulsar"):
+      var readZip = fmt"./User_templates/imported/{templateGen}.pulsar"
+      var pZip = openZipArchive(readZip)
+      var tempType = "null"
+      try:
+        for path in pZip.walkFiles:
+          if path.contains("Blocks/blocks"):
+            tempType = "block"
+          elif path.contains("Items/items"):
+            tempType = "item"
+          elif path.contains("Entites/entity"):
+            tempType = "entity"   
+        pZip.close()
+        case tempType:
+        of "block":
+          var mainBlock = readZip.eRead(fmt"Blocks/blocks/{templateGen}.json")
+          var mainGeo = readZip.eRead(fmt"Blocks/optional/geometry/{templateGen}.json")
+          var mainImg = readZip.eRead(fmt"Blocks/optional/geometry/textures/{templateGen}.png")
+          var mainSound = readZip.eRead(fmt"Blocks/optional/sounds/{templateGen}.json")
+          if mainSound == "null":
+            mainSound = "stone"
+          else:
+            mainSound = mainSound.parseJson()["sound"].to(string)
+          if mainGeo == "null":
+            for pblock in names:
+              pulsarBlock(pblock, root, outputDir, mainBlock, mainSound, false)
+          else:
+            for pblock in names:
+              pulsarBlock(pblock, root, outputDir, mainBlock, mainSound, mainGeo, mainImg, false)
 
-proc cli(args: seq[string]) =
+      except:
+        invalid = true
+        echo "can't read " & fmt"./User_templates/imported/{templateGen}.pulsar"
+        echo "error: " & getCurrentExceptionMsg()
+        echo "dir: " & os.getCurrentDir()
+      pZip.close()
+
+  os.setCurrentDir(root)
+  if not invalid:
+    manifest(outputDir, root)
+    packIcon(outputDir)
+
+proc cli*(args: seq[string]) =
   var opts = newParser("Pulsar"):
     nohelpflag()
     #im using my own help flag.
@@ -145,7 +180,7 @@ proc cli(args: seq[string]) =
     echo ".\\pulsar_cli.exe -o (name of output folder) -t (template to use) (list of names)\n"
     quit("run it with -l to list all templates", 0)
   if optGen.list:
-    var templateInfo = readFile("./template_info.txt")
+    var templateInfo = readFile("./template_info.json")
     echo templateInfo
     quit("run any of these templates with the -t option", 0)
   if optGen.help == false and optGen.list == false:

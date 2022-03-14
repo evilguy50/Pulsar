@@ -5,8 +5,8 @@ import strutils
 proc manifest*(works: string, root: string)=
     os.setCurrentDir(root)
     #setup directory placeholders
-    var resourceTemplate = "./templates/common/RP/RPmanifest.txt"
-    var behaviourTemplate = "./templates/common/BP/BPmanifest.txt"
+    var resourceTemplate = "./templates/common/RP/RPmanifest.json"
+    var behaviourTemplate = "./templates/common/BP/BPmanifest.json"
 
     #generate uuid
     var uuid1 = genUUID()

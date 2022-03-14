@@ -5,7 +5,7 @@ import strformat
 
 proc blockJson*(works: string, name: string, sound: string)=
     var rpBlockName = fmt"./{works}/RP/blocks.json" 
-    var rpBlockBase = "./templates/common/RP/blockJson.txt"
+    var rpBlockBase = "./templates/common/RP/blockJson.json"
     var rpJson: JsonNode
 
     if not os.fileExists(rpBlockName):
@@ -23,7 +23,7 @@ proc terrainJson*(works: string, name: string)=
     #generate texture json
 
     var rpTextureName = fmt"./{works}/RP/textures/terrain_texture.json"
-    var rpBlockBase = "./templates/common/RP/block_texture.txt"
+    var rpBlockBase = "./templates/common/RP/block_texture.json"
     var rpJson: JsonNode
 
     if not os.fileExists(rpTextureName):

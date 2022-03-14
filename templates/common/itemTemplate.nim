@@ -29,9 +29,10 @@ proc itemTemplate*(name: string, root: string, works: string,
     echo name, " generated BP item as ", name, ".json"
 
     #generate RP item
-    var resourceItem = fmt"./{works}/RP/items/{name}.json"
-    nameReplace(resourceJson, resourceItem, name)
-    echo name, " generated RP item as ", name, ".json"
+    if resourceJson != "none":
+      var resourceItem = fmt"./{works}/RP/items/{name}.json"
+      nameReplace(resourceJson, resourceItem, name)
+      echo name, " generated RP item as ", name, ".json"
 
     #generate texture
     var itemFile = fmt"./{works}/RP/textures/items/{name}.png"
