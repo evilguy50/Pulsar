@@ -39,7 +39,7 @@ jobs:
       if: matrix.os == 'macOS-latest'
       run: |
         nim --app:gui --out:pulsar.app c -d:release --gc:orc ./pulsar.nim
-        chmod +x ./pulsar
+        chmod +x ./pulsar.app
     - uses: actions/upload-artifact@v2
       with:
         name: 'artifact_${{ matrix.os }}'
