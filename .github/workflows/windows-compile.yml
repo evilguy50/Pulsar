@@ -25,14 +25,9 @@ jobs:
       run: |
         nimble install -y
         nim c ./pulsar_cli.nim
-    - name: windows_i386
-      if: matrix.arch == 'i386'
+    - name: windows
       run: |
-        nim --app:gui c --cpu:i386 -d:release --gc:orc --passL:"-static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic" ./pulsar.nim
-    - name: windows_i386
-      if: matrix.arch == 'amd64'
-      run: |
-        nim --app:gui c --cpu:amd64 -d:release --gc:orc --passL:"-static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic" ./pulsar.nim
+        nim --app:gui c --cpu:${{ matrix.arch }} -d:release --gc:orc --passL:"-static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic" ./pulsar.nim
     - uses: actions/upload-artifact@v2
       with:
         name: 'artifact_win_${{ matrix.arch }}'
