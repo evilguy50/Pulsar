@@ -1,4 +1,4 @@
-name: compile-generator
+name: compile-unix
 on:
   workflow_dispatch:
 
@@ -14,7 +14,6 @@ jobs:
         os:
           - ubuntu-latest
           - macOS-latest
-          - windows-latest
     steps:
     - uses: actions/checkout@v1
     - uses: RpxdYTX/install-glfw-deps@v2
@@ -26,10 +25,6 @@ jobs:
       run: |
         nimble install -y
         nim c ./pulsar_cli.nim
-    - name: windows_gui
-      if: matrix.os == 'windows-latest'
-      run: |
-        nim --app:gui c -d:release --gc:orc --passL:"-static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic" ./pulsar.nim
     - name: linux_gui
       if: matrix.os == 'ubuntu-latest'
       run: |
