@@ -6,7 +6,7 @@ jobs:
   compile:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         version:
@@ -23,11 +23,12 @@ jobs:
     - name: cli
       continue-on-error: true
       run: |
+        apt install -y mingw-w64
         nimble install -y
-        nim c ./pulsar_cli.nim
+        nim c -d:mingw ./pulsar_cli.nim
     - name: windows
       run: |
-        nim --app:gui c --cpu:${{ matrix.arch }} -d:release --gc:orc --passL:"-static-libgcc -static-libstdc++ -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic" ./pulsar.nim
+        nim --app:gui c --cpu:${{ matrix.arch }} -d:mingw --gc:orc ./pulsar.nim
     - uses: actions/upload-artifact@v2
       with:
         name: 'artifact_win_${{ matrix.arch }}'
