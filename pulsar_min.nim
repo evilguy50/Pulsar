@@ -55,9 +55,12 @@ container.add(generateButton)
 
 generateButton.onClick = proc(event: ClickEvent) =
     try:
-        generate(projectName.text, tempName.value, nameList.text)
-        nameList.text = ""
-        window.alert("Generated!")
+        if projectName.text == "":
+            window.alert("Must fill in project name")
+        else:
+            generate(projectName.text, tempName.value, nameList.text)
+            nameList.text = ""
+            window.alert("Generated!")
     except:
         window.alert(getCurrentExceptionMsg())
 
