@@ -12,11 +12,12 @@ var container = newLayoutContainer(Layout_Vertical)
 window.add(container)
 
 var projectName = newTextBox("")
-
 var temps: seq[string]
+
 var letters = @[
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
 ]
+
 var newTemplate: string
 for t in os.walkFiles("./templates/*.nim"):
     var tName = t.splitFile()[1]
