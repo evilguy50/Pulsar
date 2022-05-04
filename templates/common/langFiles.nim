@@ -24,20 +24,19 @@ proc rpLang*(works: string, name: string, langEntry: string)=
     var rpLangJson = fmt"./{works}/RP/texts/languages.json"
     var rpLangJsonTemplate = "./templates/common/RP/texts/languages.json"
 
-    if os.fileExists(rpLangFile) == false:
+    if not os.fileExists(rpLangFile):
         var rpLangFileRead = readFile(rpLangTemplate)
         var rpLangFileReplace = replace(rpLangFileRead, "$works", works)
         writeFile(rpLangFile, rpLangFileReplace)
 
-    if os.fileExists(rpLangJson) == false:
+    if not os.fileExists(rpLangJson):
         var rpLangJsonRead = readFile(rpLangJsonTemplate)
         var rpLangJsonReplace = replace(rpLangJsonRead, "$works", works)
         writeFile(rpLangJson, rpLangJsonReplace)
     echo "setup resource languages files"
 
     #populate block lang entries
-    var blockLangRead = open(rpLangFile, fmAppend)
-    write(blockLangRead, langEntry)
-    write(blockLangRead, "\n")
-    close(blockLangRead)
+    var blockLangRead = readFile(rpLangFile).split("\n")
+    blockLangRead.add(langEntry)
+    rpLangFile.writeFile(blockLangRead.join("\n"))
     echo name, " populated language entries for ", name
