@@ -1,6 +1,7 @@
-import os, strutils, strformat
+import os
 import nigui
 import pulsar_cli
+from "assets/settings/tempBox.nim" import templateCheckList
 
 app.init()
 
@@ -13,20 +14,8 @@ window.add(container)
 
 var projectName = newTextBox("")
 var temps: seq[string]
-
-var letters = @[
-    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
-]
-
-var newTemplate: string
-for t in os.walkFiles("./templates/*.nim"):
-    var tName = t.splitFile()[1]
-    newTemplate = tName
-    for c in tName:
-        for l in letters:
-            if $c == l:
-                newTemplate = newTemplate.replace($c, fmt"_{toLower($c)}")
-    temps.add(newTemplate)
+for t in templateCheckList:
+    temps.add(t)
 
 for b in os.walkFiles("./User_templates/custom/Blocks/blocks/*.json"):
     temps.add(b.splitFile()[1])
