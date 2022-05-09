@@ -6,7 +6,7 @@ jobs:
   compile:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         version:
@@ -16,19 +16,12 @@ jobs:
           - amd64
     steps:
     - uses: actions/checkout@v1
-    - uses: RpxdYTX/install-glfw-deps@v2
     - uses: iffy/install-nim@v4.1.1
       with:
         version: ${{ matrix.version }}
-    - name: cli
-      continue-on-error: true
-      run: |
-        apt install -y mingw-w64
-        nimble install -y
-        nim c -d:mingw ./pulsar_cli.nim
     - name: windows
       run: |
-        nim --app:gui c --cpu:${{ matrix.arch }} -d:mingw --gc:orc ./pulsar.nim
+        ./win_compile.bat
     - uses: actions/upload-artifact@v2
       with:
         name: 'artifact_win_${{ matrix.arch }}'
