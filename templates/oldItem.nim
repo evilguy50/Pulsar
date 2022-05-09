@@ -5,4 +5,3 @@ proc oldItem*(name: string, root: string, works: string)=
     var resourceJson = "./templates/oldItem/RP/oldItem.json"
     var itemTexture = "./templates/common/RP/textures/placeholder.png"
     itemTemplate(name, root, works, mainJson, resourceJson, itemTexture)
-    return

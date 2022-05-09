@@ -97,7 +97,6 @@ proc entityTemplate*(name: string, root: string, works: string, model: string, r
   echo name, " generated texture entry for ", name
   os.setCurrentDir(works)
 
-  return
 
 proc pulsarEntity*(name: string, root: string, works: string, model: string, renderController: string,
  texture: string, loot: string, mainJson: string, resourceJson: string, trades: string)=

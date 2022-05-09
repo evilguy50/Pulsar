@@ -35,5 +35,3 @@ proc manifest*(works: string, root: string)=
         var bpReplace3 = replace(bpReplace2, "$uuid4", uuid4s)
         var bpReplace4 = replace(bpReplace3, "$uuid1", uuid1s)
         writeFile(fmt"./{works}/BP/manifest.json", bpReplace4)
-    return
-    

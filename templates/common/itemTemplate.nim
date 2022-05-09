@@ -6,8 +6,7 @@ import nameReplace
 import textureJson
 import langFiles
 
-proc itemTemplate*(name: string, root: string, works: string,
- mainJson: string, resourceJson: string, itemTexture: string)=
+proc itemTemplate*(name, root, works, mainJson, resourceJson, itemTexture: string)=
     #setup BP folders
     folderExist("BP")
     folderExist("BP/texts")
@@ -46,13 +45,16 @@ proc itemTemplate*(name: string, root: string, works: string,
     echo name, " generated texture json entry for ", name
 
     #generate lang files
-    var itemEntry = fmt"item.pulsar:{name}.name={name}"
+    var itemEntry: string
+    if resourceJson != "none":
+        itemEntry = fmt"item.pulsar:{name}.name={name}"
+    else:
+        itemEntry = fmt"item.pulsar:{name}={name}"
     bpLang(works, name)
     rpLang(works, name, itemEntry)
     echo name, " generated item lang entry for ", name
     
     os.setCurrentDir(works)
-    return
 
 proc pulsarItem*(name: string, root: string, works: string,
  mainJson: string, resourceJson: string, itemTexture: string)=
@@ -101,4 +103,3 @@ proc pulsarItem*(name: string, root: string, works: string,
     echo name, " generated item lang entry for ", name
     
     os.setCurrentDir(root)
-    return

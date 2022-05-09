@@ -1,6 +1,5 @@
 import common/itemTemplate
 import strformat
-import strutils
 import os
 
 proc tempItem*(name: string, root: string, works: string, baseName: string)=
@@ -15,9 +14,3 @@ proc tempItem*(name: string, root: string, works: string, baseName: string)=
         itemTexture = "./templates/common/RP/textures/placeholder.png"
     os.setCurrentDir(works)
     itemTemplate(name, root, works, mainJson, resourceJson, itemTexture)
-
-    var langJson = "./RP/texts/en_US.lang"
-    var langRead = readFile(langJson)
-    var langReplace = replace(langRead, fmt"item.pulsar:{name}.name={name}", fmt"item.pulsar:{name}={name}")
-    writeFile(langJson, langReplace)
-    return

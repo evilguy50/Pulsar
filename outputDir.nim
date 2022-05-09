@@ -7,4 +7,3 @@ proc setOutput*(workDir: string)=
     os.setCurrentDir(workDir)
     var dirs: string = os.getCurrentDir()
     echo "Set project output folder to: ", dirs, "/"
-    return

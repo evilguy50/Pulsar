@@ -8,4 +8,3 @@ proc zombieEntity*(name: string, root: string, works: string)=
   var texture = "./templates/zombieEntity/RP/textures/zombieEntity.png"
   var loot = "./templates/zombieEntity/BP/zombieEntity_loot.json"
   entityTemplate(name, root, works, model, renderController, texture, loot, mainJson, resourceJson, "none")
-  return

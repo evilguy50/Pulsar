@@ -27,4 +27,6 @@ place_code_block : $ Generates a block that runs a function from the block when 
 
 player_code_block : $ Generates a block that runs a function from the player that placed it
 
+click_block : $ Generates a block that runs a function from the player that interacts with it
+
 crafting_block : $ Generates a new crafting table (only crafts recipes made for the specific table)

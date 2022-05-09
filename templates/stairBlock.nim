@@ -5,4 +5,3 @@ proc stairBlock*(name: string, root: string, works: string)=
     var geometry = "./templates/stairBlock/RP/stairBlock.json"
     var geometryTexture = "./templates/stairBlock/RP/textures/stairBlock.png"
     blockTemplate(name, root, works, mainJson, "stone", geometry, geometryTexture, false)
-    return
