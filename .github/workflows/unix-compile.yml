@@ -29,16 +29,22 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         nim --app:gui c -d:release --gc:orc ./pulsar.nim
-        nim --app:gui c -d:release --gc:orc ./pulsar_min.nim
         chmod +x ./pulsar
+    - name: linux_min
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        nim --app:gui c -d:release --gc:orc ./pulsar_min.nim
         chmod +x ./pulsar_min
+    - name: mac_min
+      if: matrix.os == 'macOS-latest'
+      run: |
+        nim --app:gui --out:pulsar_min.app c -d:release --gc:orc ./pulsar_min.nim
+        chmod +x ./pulsar_min.app
     - name: mac_gui
       if: matrix.os == 'macOS-latest'
       run: |
         nim --app:gui --out:pulsar.app c -d:release --gc:orc ./pulsar.nim
-        nim --app:gui --out:pulsar_min.app c -d:release --gc:orc ./pulsar_min.nim
         chmod +x ./pulsar.app
-        chmod +x ./pulsar_min.app
     - uses: actions/upload-artifact@v2
       with:
         name: 'artifact_${{ matrix.os }}'
