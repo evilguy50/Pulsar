@@ -1,7 +1,7 @@
 import os
 import nigui
 import pulsar_cli
-from "assets/settings/tempBox.nim" import templateCheckList
+from "./assets/settings/tempBox.nim" import templateCheckList
 
 app.init()
 
