@@ -8,7 +8,7 @@ proc blockJson*(works: string, name: string, sound: string)=
     var rpBlockBase = "./templates/common/RP/blockJson.json"
     var rpJson: JsonNode
 
-    if not os.fileExists(rpBlockName):
+    if not fileExists(rpBlockName):
         rpJson = rpBlockBase.readFile().parseJson()
     else:
         rpJson = rpBlockName.readFile().parseJson()
@@ -26,7 +26,7 @@ proc terrainJson*(works: string, name: string)=
     var rpBlockBase = "./templates/common/RP/block_texture.json"
     var rpJson: JsonNode
 
-    if not os.fileExists(rpTextureName):
+    if not fileExists(rpTextureName):
         rpJson = rpBlockBase.readFile().parseJson()
     else:
         rpJson = rpTextureName.readFile().parseJson() 

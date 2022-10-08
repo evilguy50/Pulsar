@@ -9,6 +9,7 @@ import strutils
 import strformat
 import templateList
 import zippy/ziparchives
+import nimpy
 import "Assets/Settings/tempBox.nim"
 import "templates/common/blockTemplate.nim"
 import "templates/common/itemTemplate.nim"
@@ -99,9 +100,22 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
       inc(nameNumber, 1)
       newItem(itemN, root, outputDir, nameNumber, names[0], names[1])
   
-  #dynamic templates
   var invalid = false
   if baseTemplate == false:
+    #python templates
+    os.setCurrentDir(root)
+    var pyTemplate = true
+    if not fileExists("./User_templates/python/" & templateGen & "/" & templateGen & ".py"):
+      pyTemplate = false
+    if pyTemplate:
+      var runner = pyImport(cstring("User_templates.python." & templateGen))
+      os.setCurrentDir(outputDir)
+      for pyN in names:
+        inc(nameNumber, 1)
+        echo "running python template: " & templateGen & "\nfor Name: " & pyN
+        discard runner.`template`(@[pyN, root, outputDir].join(" "))
+
+    #dynamic templates
     os.setCurrentDir(root)
     if fileExists(fmt"./User_templates/custom/Blocks/blocks/{templateGen}.json"):
       if fileExists(fmt"./User_templates/custom/Blocks/optional/geometry/{templateGen}.json"):

@@ -3,7 +3,7 @@ import strformat
 import strutils
 import json
 
-proc textureJson*(works: string, name: string, templateType: string)=
+proc textureJson*(works: string, name: string, templateType: string) =
     var textures_txt = "./templates/common/RP/item_textures.json"
     var textures_entry_txt: string
     if templateType == "entity":

@@ -212,6 +212,17 @@ while not windowShouldClose():
             var ubar = ufoo
             drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
         os.setCurrentDir(user_root)
+        os.setCurrentDir("User_templates")
+        os.setCurrentDir("python")
+        for i in os.walkDir(getCurrentDir()):
+            if i[1].dirExists():
+                echo "found python template: " & i[1].splitPath()[1]
+                var user_tmpNameSTR = split(i[1].splitPath()[1], ".", 2)
+                var user_tmpName: cstring = user_tmpNameSTR[0].cstring
+                ufoo = ufoo + 15
+                var ubar = ufoo
+                drawText(user_tmpName, listTXT_xpos + 710, ubar, fontSize, Black)
+        os.setCurrentDir(user_root)
 
     #render name box
     var name_string = cast[cstring](addr name_chars[0])

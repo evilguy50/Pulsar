@@ -1,13 +1,7 @@
-import os
-import strformat
-import strutils
-import folderExist
-import nameReplace
-import textureJson
-import langFiles
+import includes
 
 proc itemTemplate*(name: string, root: string, works: string,
- mainJson: string, resourceJson: string, itemTexture: string)=
+ mainJson: string, resourceJson: string, itemTexture: string) =
     #setup BP folders
     folderExist("BP")
     folderExist("BP/texts")

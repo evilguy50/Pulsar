@@ -1,4 +1,4 @@
-import os, strutils, strformat
+import os, strutils
 import nigui
 import pulsar_cli
 
@@ -14,18 +14,18 @@ window.add(container)
 var projectName = newTextBox("")
 var temps: seq[string]
 
-var letters = @[
-    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
-]
+var letters: seq[char] = @['_']
+for l in Letters:
+    letters.add(l)
 
 var newTemplate: string
 for t in os.walkFiles("./templates/*.nim"):
     var tName = t.splitFile()[1]
-    newTemplate = tName
-    for c in tName:
-        for l in letters:
-            if $c == l:
-                newTemplate = newTemplate.replace($c, fmt"_{toLower($c)}")
+    newTemplate = tName.toLower().multiReplace(@[
+        ("entity", "_entity"),
+        ("block", "_block"),
+        ("item", "_item")
+    ])
     temps.add(newTemplate)
 
 for b in os.walkFiles("./User_templates/custom/Blocks/blocks/*.json"):
@@ -39,6 +39,10 @@ for i in os.walkFiles("./User_templates/custom/Items/items/*.json"):
 
 for p in os.walkFiles("./User_templates/imported/*.pulsar"):
     temps.add(p.splitFile()[1])
+
+for py in os.walkDir("./User_templates/python"):
+    if py[1].dirExists():
+        temps.add(py[1].splitPath()[1])
 
 var tempName = newComboBox(temps)
 

@@ -1,10 +1,4 @@
-import os
-import strformat
-import strutils
-import folderExist
-import nameReplace
-import blockJson
-import langFiles
+import includes
 
 proc blockTemplate*(name: string, root: string, works: string,
  mainJson: string, soundJson: string,function: bool)=
@@ -65,7 +59,7 @@ proc blockTemplate*(name: string, root: string, works: string,
     return
 
 proc blockTemplate*(name: string, root: string, works: string,
- mainJson: string, soundJson: string, geometry: string, geometryTexture: string, function: bool)=
+ mainJson: string, soundJson: string, geometry: string, geometryTexture: string, function: bool) =
     var geometryTexture2 = geometryTexture
 
     #create BP folders

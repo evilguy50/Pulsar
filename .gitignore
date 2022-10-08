@@ -1,0 +1,6 @@
+pulsar.exe
+pulsar_min.exe
+pulsar_cli.exe
+User_templates/python/pulsar_py.pyd
+User_templates/python/py_example/__pycache__
+nimclipboard

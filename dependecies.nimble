@@ -5,6 +5,6 @@ license       = "GPL 3.0"
 
 requires "nimraylib_now == 0.13.2"
 requires "nimclipboard >= 0.1.2"
-requires "zippy"
+requires "zippy == 0.9.5"
 requires "argparse"
 requires "uuids"

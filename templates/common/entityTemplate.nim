@@ -1,13 +1,7 @@
-import os
-import strformat
-import strutils
-import folderExist
-import nameReplace
-import langFiles
-import textureJson
+import includes
 
 proc entityTemplate*(name: string, root: string, works: string, model: string, renderController: string,
- texture: string, loot: string, mainJson: string, resourceJson: string, trades: string)=
+ texture: string, loot: string, mainJson: string, resourceJson: string, trades: string) =
 
   #setup BP folders
   folderExist("BP")
