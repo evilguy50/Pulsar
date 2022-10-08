@@ -1,0 +1,31 @@
+name: windows-compile
+on:
+  workflow_dispatch:
+
+jobs:
+  compile:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        version:
+          - stable
+        arch:
+          - i386
+          - amd64
+    steps:
+    - uses: actions/checkout@v1
+    - uses: iffy/install-nim@v4.1.1
+      with:
+        version: ${{ matrix.version }}
+    - name: windows
+      run: |
+        ./win_compile.bat
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'artifact_win_${{ matrix.arch }}'
+        path: |
+          ./
+          *.nim
+          !**/*.nim

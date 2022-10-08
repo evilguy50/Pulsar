@@ -56,7 +56,6 @@ proc blockTemplate*(name: string, root: string, works: string,
     echo name, " generated texture as ", name, ".json"
 
     os.setCurrentDir(works)
-    return
 
 proc blockTemplate*(name: string, root: string, works: string,
  mainJson: string, soundJson: string, geometry: string, geometryTexture: string, function: bool) =
@@ -119,7 +118,6 @@ proc blockTemplate*(name: string, root: string, works: string,
     echo name, " generated texture as ", name, ".json"
 
     os.setCurrentDir(works)
-    return
 
 
 proc pulsarBlock*(name: string, root: string, works: string,
@@ -179,7 +177,6 @@ proc pulsarBlock*(name: string, root: string, works: string,
     echo name, " generated texture as ", name, ".json"
 
     os.setCurrentDir(root)
-    return
 
 proc pulsarBlock*(name: string, root: string, works: string,
  mainJson: string, soundJson: string, geometry: string, geometryTexture: string, function: bool)=
@@ -243,4 +240,3 @@ proc pulsarBlock*(name: string, root: string, works: string,
     echo name, " generated texture as ", name, ".json"
 
     os.setCurrentDir(root)
-    return

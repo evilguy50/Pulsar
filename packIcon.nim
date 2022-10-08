@@ -9,4 +9,3 @@ proc packIcon*(works: string)=
         copyFile(icon, bpIconFile)
     if os.fileExists(rpIconFile) == false:
         copyFile(icon, rpIconFile)
-    return

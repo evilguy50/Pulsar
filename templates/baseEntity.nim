@@ -7,4 +7,3 @@ proc baseEntity*(name: string, root: string, works: string)=
   var renderController = "./templates/common/RP/common_render.json"
   var texture = "./templates/baseEntity/RP/textures/base_texture.png"
   entityTemplate(name, root, works, model, renderController, texture, "none", mainJson, resourceJson, "none")
-  return

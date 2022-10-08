@@ -7,6 +7,7 @@ include templates/zombieEntity
 include templates/basicBlock
 include templates/craftingBlock
 include templates/lightBlock
+include templates/clickBlock
 include templates/placeCodeBlock
 include templates/playerCodeBlock
 include templates/slabBlock

@@ -1,6 +1,7 @@
 import os, strutils
 import nigui
 import pulsar_cli
+from "./Assets/Settings/tempBox.nim" import templateCheckList
 
 app.init()
 

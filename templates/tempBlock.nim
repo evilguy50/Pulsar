@@ -11,7 +11,6 @@ proc tempBlock*(name: string, root: string, works: string, baseName: string)=
         mainSound = readFile(fmt"./User_templates/custom/Blocks/optional/sounds/{baseName}.json").parseJson()["sound"].to(string)
     os.setCurrentDir(works)
     blockTemplate(name, root, works, mainJson, mainSound, false)
-    return
 
 proc tempBlockGeo*(name: string, root: string, works: string, baseName: string)=
     os.setCurrentDir(root)
@@ -23,4 +22,3 @@ proc tempBlockGeo*(name: string, root: string, works: string, baseName: string)=
     var geometryTexture = fmt"./User_templates/custom/Blocks/optional/geometry/textures/{baseName}.png"
     os.setCurrentDir(works)
     blockTemplate(name, root, works, mainJson, mainSound, geometry, geometryTexture, false)
-    return

@@ -74,6 +74,10 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
     for player in names:
       playerCodeBlock(player, root, outputDir)
 
+  if templateGen == "click_block":
+    for click in names:
+      clickBlock(click, root, outputDir)
+
   if templateGen == "slab_block":
     for slabs in names:
       slabBlock(slabs, root, outputDir)
@@ -98,7 +102,7 @@ proc generate*(outputDir: string, templateGen: string, nameStr: string) =
   if templateGen == "new_item":
     for itemN in names:
       inc(nameNumber, 1)
-      newItem(itemN, root, outputDir, nameNumber, names[0], names[1])
+      newItem(itemN, root, outputDir, nameNumber)
   
   var invalid = false
   if baseTemplate == false:
