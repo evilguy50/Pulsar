@@ -19,15 +19,8 @@ var letters: seq[char] = @['_']
 for l in Letters:
     letters.add(l)
 
-var newTemplate: string
-for t in os.walkFiles("./templates/*.nim"):
-    var tName = t.splitFile()[1]
-    newTemplate = tName.toLower().multiReplace(@[
-        ("entity", "_entity"),
-        ("block", "_block"),
-        ("item", "_item")
-    ])
-    temps.add(newTemplate)
+for t in templateCheckList:
+    temps.add(t)
 
 for b in os.walkFiles("./User_templates/custom/Blocks/blocks/*.json"):
     temps.add(b.splitFile()[1])
